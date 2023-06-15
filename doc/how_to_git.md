@@ -23,7 +23,7 @@ $ git clone [リポジトリのアドレス]
 $ git clone -b [ブランチ名][リポジトリのアドレス]
 
 #今回は
-$ git clone -b dev1 https://github.com/nonadayo/LateSaver.git
+$ git clone https://github.com/nonadayo/LateSaver.git
 ```
 
 以下のようになったら成功！
@@ -33,6 +33,9 @@ remote: Counting objects: 3, done.
 remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
 Unpacking objects: 100% (3/3), done.
 ```
+
+## 2-2.接続しよう！！
+
 
 ## 3.自分のローカル環境で開発ブランチを作成しよう！！
 ```
@@ -53,11 +56,7 @@ $ git checkout dev1
 ```
 git checkout main
 git merge dev1
-```
 
-
-
-```
 git add --all
 git commit -m "[コメント]"
 git push
