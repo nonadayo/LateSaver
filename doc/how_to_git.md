@@ -51,6 +51,13 @@ $ git checkout dev1
 ![iccd](pic/git.png)
 
 ```
+git checkout main
+git merge dev1
+```
+
+
+
+```
 git add --all
 git commit -m "[コメント]"
 git push
