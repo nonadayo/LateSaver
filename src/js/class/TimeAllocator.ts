@@ -105,7 +105,10 @@ export default class TimeAllocator {
         const minDistribute: Array<[Task, number]> = this.minutesDistribute();
         let onTime: Time = this.start.copy();
         minDistribute.map(distElem => {
-            
+            const sectionStart: Time = onTime.copy();
+            onTime.addMin(distElem[1])
+            const sectionEnd:   Time = onTime.copy();
+            this.result.push([distElem[0], sectionStart, sectionEnd]);
         })
     }
     //////////////////////////////////////////////////////////////////////////////////
