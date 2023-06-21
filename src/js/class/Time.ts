@@ -61,7 +61,14 @@ export default class Time {
     // 引数: 足したい分数
     // 戻り値: なし
     addMin(min: number): void {
-        
+        this.minutes += min;
+        while(this.minutes >= 60) {
+            this.hours++;
+            if (this.hours >= 24) {
+                this.hours = 0;
+            }
+            this.minutes -= 60;
+        }
     }
     /////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
