@@ -1,0 +1,42 @@
+入れ子構造
+    .className {
+
+        .subClassName {                     ※.className .subClassNameとしてセレクタを適用
+
+        }
+
+        &__subClassName {                     ※.className__subClassNameとしてセレクタを適用
+
+        }
+
+        &:hover {                           ※.className:hoverとしてセレクタを適用
+
+        }
+    }
+
+
+
+関数の定義と呼び出し
+    関数の定義
+        @mixin functionName($x, $y) {       ※関数functionNameを定義。引数には$xと$yを指定する
+            width: $x;
+            height: $y;
+            @content                        ※この部分にはcssを書ける(詳細は呼び出しで分かる)
+        }
+    関数の呼び出し
+        .className {
+            @include functionName(10px, 20px) {
+                display: block;             ※@contentに代入されて適用される
+            }
+        }
+
+
+
+変数の定義
+    $x: 16px;
+    $y: black;
+
+
+
+ファイルのimport
+    import "./common.scss";                 ※変数や関数をまとめたファイルの読み込みとかに使うとよい

@@ -1,0 +1,6 @@
+1. VScodeに拡張機能をダウンロード
+    Live Sass Compilerを検索しインストール
+
+2. .scssファイルを作成して編集
+3. VScodeの右下にwatch Sassがあるので押す
+4. scssファイルが自動でコンパイルされてcssになるようになる
