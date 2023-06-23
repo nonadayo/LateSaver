@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- moduleの読み込み type="module"としないとimportが使えないので注意-->
+    <script type="module" src="../js/class/index.js"></script>
+    <script type="module" src="../js/editTasks.js"></script>
+    <!-- cssファイルの読み込み -->
+    <link rel="stylesheet" href="../style/reset.css">
+    <title>タスク編集 | LateSaver</title>
+</head>
+
+<body>
+    <h1>Late Saver タスク編集</h1>
+    <a href="./index.html">メインページ</a>
+    <hr>
+    <h3>タスク一覧</h3>
+    <div id="div-taskTable"></div>
+    <fieldset>
+        <legend>タスクを追加</legend>
+        <label for="input-newTaskTitle">タイトル：</label>
+        <input type="text" id="input-newTaskTitle">
+        <label for="input-newTaskMin">所要時間（最短）：</label>
+        <input type="number" id="input-newTaskMin">
+        <label for="input-newTaskMax">所要時間（最長）：</label>
+        <input type="number" id="input-newTaskMax">
+        <button id="button-newTask">追加</button>
+    </fieldset>
+    <hr>
+    <a href="./index.html">メインページ</a>
+</body>
+
+</html>

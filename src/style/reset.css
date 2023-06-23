@@ -108,3 +108,18 @@
   white-space: nowrap !important;
   border: 0 !important;
 }/*# sourceMappingURL=reset.css.map */
+
+table {
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  border: 0.1em solid;
+  text-align: center;
+}
+
+fieldset{
+  border: 0.1em solid;
+  margin: 1em;
+}
