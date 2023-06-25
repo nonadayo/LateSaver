@@ -41,7 +41,7 @@ function updateTaskTableFromTasksList() {
     tmpTaskTable.setAttribute("id", "table-tasks");
 
     const tmpIndexTr = document.createElement("tr");
-    const indexStringArray = ["優先順位", "タスク名", "所要時間（最短）", "所要時間（最長）", "タスクを削除"];
+    const indexStringArray = ["優先順位", "タスク名", "所要時間（最短）", "所要時間（最長）", "タスクを削除", "優先順位を1つ上げる"];
     indexStringArray.forEach((indexString) => {
         const tmpIndexTh = document.createElement("th");
         tmpIndexTh.textContent = indexString;
@@ -54,7 +54,6 @@ function updateTaskTableFromTasksList() {
         const tmpTaskTr = document.createElement("tr");
         tmpTaskTr.setAttribute("class", "tr-task");
         tmpTaskTr.setAttribute("id", task.id);
-        tmpTaskTr.setAttribute("draggalbe", "true");
 
         const tmpTaskIdTd = document.createElement("td");
         tmpTaskIdTd.textContent = task.id;
@@ -66,6 +65,7 @@ function updateTaskTableFromTasksList() {
         inputTaskTitle.setAttribute("id", `input-taskTitle${task.id}`);
         inputTaskTitle.addEventListener("input", () => {
             updateLocalStorageFromTaskTable();
+            updateTasksListFromLocalStorage();
         });
         tmpTaskTitleTd.appendChild(inputTaskTitle);
         tmpTaskTr.appendChild(tmpTaskTitleTd);
@@ -76,6 +76,7 @@ function updateTaskTableFromTasksList() {
         inputTaskMin.setAttribute("id", `input-taskMin${task.id}`);
         inputTaskMin.addEventListener("input", () => {
             updateLocalStorageFromTaskTable();
+            updateTasksListFromLocalStorage();
         });
         inputTaskMin.setAttribute("type", "number");
         tmpTaskMinTd.appendChild(inputTaskMin);
@@ -87,6 +88,7 @@ function updateTaskTableFromTasksList() {
         inputTaskMax.setAttribute("id", `input-taskMax${task.id}`);
         inputTaskMax.addEventListener("input", () => {
             updateLocalStorageFromTaskTable();
+            updateTasksListFromLocalStorage();
         });
         inputTaskMax.setAttribute("type", "number");
         tmpTaskMaxTd.appendChild(inputTaskMax);
@@ -95,15 +97,44 @@ function updateTaskTableFromTasksList() {
         const tmpTaskDeleteTd = document.createElement("td");
         const buttonTaskDelete = document.createElement("button");
         buttonTaskDelete.setAttribute("type", "button");
-        buttonTaskDelete.setAttribute("id", `button-task${task.id}`);
+        buttonTaskDelete.setAttribute("id", `button-taskDelete${task.id}`);
         buttonTaskDelete.textContent = "削除";
         buttonTaskDelete.addEventListener("click", (e) => {
-            console.log(e.target.id);
+            // console.log(e.target.id);
+            if (window.confirm(`「${tasksList.data[Number(e.target.id.split("button-taskDelete")[1]) - 1].title}」を削除しますか？`)) {
+                tasksList.data.splice(Number(e.target.id.split("button-taskDelete")[1]) - 1, 1);
+                // console.log(tasksList.data);
+                updateLocalStorageFromTasksList();
+                updateTasksListFromLocalStorage();
+                updateTaskTableFromTasksList();
+            }
             //deleteTask(e.target.id);
             //updateTaskTableFromTasksList();
         });
         tmpTaskDeleteTd.appendChild(buttonTaskDelete);
         tmpTaskTr.appendChild(tmpTaskDeleteTd);
+
+        const tmpTaskPriorityTd = document.createElement("td");
+        if (task.id === 1) {
+            tmpTaskPriorityTd.textContent = "-";
+        } else {
+            const buttonTaskPriority = document.createElement("button");
+            buttonTaskPriority.setAttribute("type", "button");
+            buttonTaskPriority.setAttribute("id", `button-taskPriority${task.id}`);
+            buttonTaskPriority.textContent = "優先順位を上げる";
+            buttonTaskPriority.addEventListener("click", (e) => {
+                // console.log(e.target.id);
+                [tasksList.data[task.id - 2].title, tasksList.data[task.id - 1].title] = [tasksList.data[task.id - 1].title, tasksList.data[task.id - 2].title];
+                [tasksList.data[task.id - 2].min, tasksList.data[task.id - 1].min] = [tasksList.data[task.id - 1].min, tasksList.data[task.id - 2].min];
+                [tasksList.data[task.id - 2].max, tasksList.data[task.id - 1].max] = [tasksList.data[task.id - 1].max, tasksList.data[task.id - 2].max];
+
+                updateLocalStorageFromTasksList();
+                updateTasksListFromLocalStorage();
+                updateTaskTableFromTasksList();
+            });
+            tmpTaskPriorityTd.appendChild(buttonTaskPriority);
+        }
+        tmpTaskTr.appendChild(tmpTaskPriorityTd);
 
         tmpTaskTable.appendChild(tmpTaskTr);
     });
@@ -121,6 +152,19 @@ function updateLocalStorageFromTaskTable() {
         tmpDataObject.max = document.getElementById(`input-taskMax${id}`).value;
         savingDataObjectArray.push(tmpDataObject);
     }
+    localStorage.setItem("tasks", JSON.stringify(savingDataObjectArray));
+}
+
+function updateLocalStorageFromTasksList() {
+    console.log(tasksList.data);
+    const savingDataObjectArray = [];
+    tasksList.data.forEach((task) => {
+        let tmpDataObject = {};
+        tmpDataObject.title = task.title
+        tmpDataObject.min = task.min
+        tmpDataObject.max = task.max
+        savingDataObjectArray.push(tmpDataObject);
+    });
     localStorage.setItem("tasks", JSON.stringify(savingDataObjectArray));
 }
 
