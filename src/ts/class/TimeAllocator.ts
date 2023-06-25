@@ -22,7 +22,7 @@ export default class TimeAllocator {
     // 稼働可能時間、タスクの最大時間、最小時間から最適な時間の比率を求める関数
     // 引数: 稼働可能時間
     // 戻り値: [Taskインスタンス, その時間比率]を要素とする配列
-    descideMinRatio(availMinutes: number): Array<[Task, number]> {
+    decideMinRatio(availMinutes: number): Array<[Task, number]> {
         // 最大時間と最小時間の計算
         let maxsum: number = this.tasksList.maxSum();
         let minsum: number = this.tasksList.minSum();
@@ -85,7 +85,7 @@ export default class TimeAllocator {
         // 稼働可能時間の計算
         const availMinutes: number = this.end.differFrom(this.start).getValAsMin();
         // 分配比率の決定
-        const distributeRatio: Array<[Task, number]> = this.descideMinRatio(availMinutes);
+        const distributeRatio: Array<[Task, number]> = this.decideMinRatio(availMinutes);
         // 分配の作成
         return this.distributeValByRatio(availMinutes, distributeRatio);
     }

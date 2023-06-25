@@ -13,7 +13,7 @@ var TimeAllocator = /** @class */ (function () {
     // 稼働可能時間、タスクの最大時間、最小時間から最適な時間の比率を求める関数
     // 引数: 稼働可能時間
     // 戻り値: [Taskインスタンス, その時間比率]を要素とする配列
-    TimeAllocator.prototype.descideMinRatio = function (availMinutes) {
+    TimeAllocator.prototype.decideMinRatio = function (availMinutes) {
         // 最大時間と最小時間の計算
         var maxsum = this.tasksList.maxSum();
         var minsum = this.tasksList.minSum();
@@ -72,7 +72,7 @@ var TimeAllocator = /** @class */ (function () {
         // 稼働可能時間の計算
         var availMinutes = this.end.differFrom(this.start).getValAsMin();
         // 分配比率の決定
-        var distributeRatio = this.descideMinRatio(availMinutes);
+        var distributeRatio = this.decideMinRatio(availMinutes);
         // 分配の作成
         return this.distributeValByRatio(availMinutes, distributeRatio);
     };

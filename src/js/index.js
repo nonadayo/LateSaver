@@ -1,37 +1,95 @@
 import { Task, TasksList, Time, TimeAllocator } from "./class/index.js";
-const tasksList = new TasksList();
 // tasksList.add(new Task("test0", 60, 10, 0, 0));
 // tasksList.add(new Task("test1", 50, 5, 0, 0));
 // tasksList.add(new Task("test2", 40, 20, 0, 0));
 // tasksList.add(new Task("test3", 30, 15, 0, 0));
 // const allocator = new TimeAllocator(new Time(10, 30), new Time(11, 30), tasksList);
 // allocator.allocate()
-console.log(allocator.result)
+// console.log(allocator.result)
+
+let tasksList;
+let departureTime;
+
+const inputDepartureTime = document.getElementById("input-departureTime");
+const buttonWakeup = document.getElementById("button-wakeup");
+const divThisMorningTasks = document.getElementById("div-thisMorningTasks");
+const divTaskTable = document.getElementById("div-taskTable");
+const inputNewTaskTitle = document.getElementById("input-newTaskTitle");
+const inputNewTaskMin = document.getElementById("input-newTaskMin");
+const inputNewTaskMax = document.getElementById("input-newTaskMax");
+const buttonNewTask = document.getElementById("button-newTask");
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM content was loaded.");
-    //localStorageにJSON文字列として保管しておいたタスク「tasks」を取り出し、オブジェクトに変換
-    //もし、localStorageに「tasks」がなければ「tasksObject」には「null」が入る
-    const tasksObject = JSON.parse(localStorage.getItem("tasks"));
-    console.log(localStorage.getItem("tasks"));
-    console.log(tasksObject);
+    // console.log("DOM content was loaded.");
+    updateTasksListFromLocalStorage();
+    updateTaskTableFromTasksList();
 
-    if (tasksObject !== null) {
-        let tmpTaskIndex = 1;//読み込んだタスクの順番
-        for (const task in tasksObject) {
-            console.log(tasksObject[task]);
-            //優先順位とIDは暫定的に読み込んだ順にする
-            tasksList.add(new Task(tasksObject[task].title, tasksObject[task].max, tasksObject[task].min, tmpTaskIndex, tmpTaskIndex));
-        }
-        console.log(taskArray);
-    } else {
-        console.log("There are no tasks.");
+    const lsDepartureTimeString = localStorage.getItem("departureTime");
+    if (lsDepartureTimeString) {
+        // console.log(lsDepartureTimeString);
+        inputDepartureTime.value = lsDepartureTimeString;
+        departureTime = timeStringToTimeInstance(lsDepartureTimeString);
+        // console.log(departureTime);
     }
-
-    createTaskTable();
 });
 
-function createTaskTable() {
+function timeStringToTimeInstance(timeString) {
+    const tmpHourMinuteStringArray = timeString.split(":");
+    return new Time(Number(tmpHourMinuteStringArray[0]), Number(tmpHourMinuteStringArray[1]));
+}
+
+inputDepartureTime.addEventListener("input", (e) => {
+    localStorage.setItem("departureTime", e.target.value);
+    departureTime = timeStringToTimeInstance(e.target.value);
+});
+
+buttonWakeup.addEventListener("click", () => {
+    //いったん「divThisMorningTasks」の中身をすべて削除
+    while (divThisMorningTasks.firstChild) {
+        divThisMorningTasks.removeChild(divThisMorningTasks.firstChild);
+    }
+
+    const tmpTaskOl = document.createElement("ol");
+
+    const now = new Date();
+    const nowTime = new Time(now.getHours(), now.getMinutes());
+    if (0 < departureTime.differFrom(nowTime).getValAsMin()) {
+        //「現在時刻<出発時刻」の場合
+        const tasksListForAllocate = new TasksList();
+        tasksListForAllocate.data = Array.from(tasksList.data);
+        // console.log(tasksList.data);
+        // console.log(tasksListForAllocate.data);
+        const allocator = new TimeAllocator(nowTime, departureTime, tasksListForAllocate);
+        allocator.allocate();
+        const thisMorningTasksArray = allocator.result;
+        // console.log(thisMorningTasksArray);
+        thisMorningTasksArray.forEach((task) => {
+            const tmpTaskLi = document.createElement("li");
+            tmpTaskLi.textContent = `${task[0].title}（${task[1].getStr()}～${task[2].getStr()}）`;
+            tmpTaskOl.appendChild(tmpTaskLi);
+        });
+        divThisMorningTasks.appendChild(tmpTaskOl);
+    }
+});
+
+function updateTasksListFromLocalStorage() {
+    //localStorageにJSON文字列として保管しておいたタスク「tasks」を取り出し、配列に変換
+    //もし、localStorageに「tasks」がなければ「tasksObjectArray」には「null」が入る
+    const tasksObjectArray = JSON.parse(localStorage.getItem("tasks"));
+    tasksList = new TasksList();
+    if (tasksObjectArray) {
+        let tmpTaskIndex = 1;//読み込んだタスクの順番
+        tasksObjectArray.forEach((task) => {
+            //優先順位とIDは読み込んだ順にする
+            tasksList.add(new Task(task.title, Number(task.max), Number(task.min), tmpTaskIndex, tmpTaskIndex++));
+        });
+        // console.log(`There are ${tasksList.data.length} task(s).`);
+    } else {
+        // console.log("There are no localStorage data.");
+    }
+}
+
+function updateTaskTableFromTasksList() {
     //いったん「divTaskTable」の中身をすべて削除
     while (divTaskTable.firstChild) {
         divTaskTable.removeChild(divTaskTable.firstChild);
@@ -41,7 +99,7 @@ function createTaskTable() {
     tmpTaskTable.setAttribute("id", "table-tasks");
 
     const tmpIndexTr = document.createElement("tr");
-    const indexStringArray = ["優先順位", "タスク名", "所要時間（最短）", "所要時間（最長）", "タスクを削除"];
+    const indexStringArray = ["優先順位", "タスク名", "所要時間（最短）", "所要時間（最長）", "タスクを削除", "優先順位を1つ上げる"];
     indexStringArray.forEach((indexString) => {
         const tmpIndexTh = document.createElement("th");
         tmpIndexTh.textContent = indexString;
@@ -50,38 +108,134 @@ function createTaskTable() {
     tmpTaskTable.appendChild(tmpIndexTr);
 
     //読み込んだタスクをhtmlの表に表示
-    taskArray.forEach((task) => {
+    tasksList.data.forEach((task) => {
         const tmpTaskTr = document.createElement("tr");
         tmpTaskTr.setAttribute("class", "tr-task");
-        tmpTaskTr.setAttribute("id", task[taskLabels.id]);
-        tmpTaskTr.setAttribute("draggalbe", "true");
-        tmpTaskTr.appendChild(document.createElement("td").appendChild(document.createTextNode(task[taskLabels.order])));
-        tmpTaskTr.appendChild(document.createElement("td").appendChild(document.createTextNode(task[taskLabels.title])));
-        tmpTaskTr.appendChild(document.createElement("td").appendChild(document.createTextNode(task[taskLabels.minTime])));
-        tmpTaskTr.appendChild(document.createElement("td").appendChild(document.createTextNode(task[taskLabels.maxTime])));
-        const tmpDeleteButton = document.createElement("button");
-        tmpDeleteButton.setAttribute("type", "button");
-        tmpDeleteButton.setAttribute("id", `button-task${task[taskLabels.id]}`);
-        tmpDeleteButton.textContent = "削除";
-        tmpDeleteButton.addEventListener("click", (e) => {
-            console.log(e.target.id);
-            //deleteTask(e.target.id);
-            //updateTaskTable();
-        });
-        tmpTaskTr.appendChild(document.createElement("td").appendChild(tmpDeleteButton));
+        tmpTaskTr.setAttribute("id", task.id);
 
-        let tmpTd = document.createElement("td");
-        tmpTd.textContent = task[taskLabels.order];
-        tmpTaskTr.appendChild(tmpTd);
-        tmpTd.textContent = task[taskLabels.title];
-        tmpTaskTr.appendChild(tmpTd);
-        tmpTd.textContent = task[taskLabels.minTime];
-        tmpTaskTr.appendChild(tmpTd);
-        tmpTd.textContent = task[taskLabels.maxTime];
-        tmpTaskTr.appendChild(tmpTd);
-        tmpTd.textContent = null;
+        const tmpTaskIdTd = document.createElement("td");
+        tmpTaskIdTd.textContent = task.id;
+        tmpTaskTr.appendChild(tmpTaskIdTd);
+
+        const tmpTaskTitleTd = document.createElement("td");
+        const inputTaskTitle = document.createElement("input");
+        inputTaskTitle.value = task.title;
+        inputTaskTitle.setAttribute("id", `input-taskTitle${task.id}`);
+        inputTaskTitle.addEventListener("input", () => {
+            updateLocalStorageFromTaskTable();
+            updateTasksListFromLocalStorage();
+        });
+        tmpTaskTitleTd.appendChild(inputTaskTitle);
+        tmpTaskTr.appendChild(tmpTaskTitleTd);
+
+        const tmpTaskMinTd = document.createElement("td");
+        const inputTaskMin = document.createElement("input");
+        inputTaskMin.value = task.min;
+        inputTaskMin.setAttribute("id", `input-taskMin${task.id}`);
+        inputTaskMin.addEventListener("input", () => {
+            updateLocalStorageFromTaskTable();
+            updateTasksListFromLocalStorage();
+        });
+        inputTaskMin.setAttribute("type", "number");
+        tmpTaskMinTd.appendChild(inputTaskMin);
+        tmpTaskTr.appendChild(tmpTaskMinTd);
+
+        const tmpTaskMaxTd = document.createElement("td");
+        const inputTaskMax = document.createElement("input");
+        inputTaskMax.value = task.max;
+        inputTaskMax.setAttribute("id", `input-taskMax${task.id}`);
+        inputTaskMax.addEventListener("input", () => {
+            updateLocalStorageFromTaskTable();
+            updateTasksListFromLocalStorage();
+        });
+        inputTaskMax.setAttribute("type", "number");
+        tmpTaskMaxTd.appendChild(inputTaskMax);
+        tmpTaskTr.appendChild(tmpTaskMaxTd);
+
+        const tmpTaskDeleteTd = document.createElement("td");
+        const buttonTaskDelete = document.createElement("button");
+        buttonTaskDelete.setAttribute("type", "button");
+        buttonTaskDelete.setAttribute("id", `button-taskDelete${task.id}`);
+        buttonTaskDelete.textContent = "削除";
+        buttonTaskDelete.addEventListener("click", (e) => {
+            // console.log(e.target.id);
+            if (window.confirm(`「${tasksList.data[Number(e.target.id.split("button-taskDelete")[1]) - 1].title}」を削除しますか？`)) {
+                tasksList.data.splice(Number(e.target.id.split("button-taskDelete")[1]) - 1, 1);
+                // console.log(tasksList.data);
+                updateLocalStorageFromTasksList();
+                updateTasksListFromLocalStorage();
+                updateTaskTableFromTasksList();
+            }
+            //deleteTask(e.target.id);
+            //updateTaskTableFromTasksList();
+        });
+        tmpTaskDeleteTd.appendChild(buttonTaskDelete);
+        tmpTaskTr.appendChild(tmpTaskDeleteTd);
+
+        const tmpTaskPriorityTd = document.createElement("td");
+        if (task.id === 1) {
+            tmpTaskPriorityTd.textContent = "-";
+        } else {
+            const buttonTaskPriority = document.createElement("button");
+            buttonTaskPriority.setAttribute("type", "button");
+            buttonTaskPriority.setAttribute("id", `button-taskPriority${task.id}`);
+            buttonTaskPriority.textContent = "優先順位を上げる";
+            buttonTaskPriority.addEventListener("click", (e) => {
+                // console.log(e.target.id);
+                [tasksList.data[task.id - 2].title, tasksList.data[task.id - 1].title] = [tasksList.data[task.id - 1].title, tasksList.data[task.id - 2].title];
+                [tasksList.data[task.id - 2].min, tasksList.data[task.id - 1].min] = [tasksList.data[task.id - 1].min, tasksList.data[task.id - 2].min];
+                [tasksList.data[task.id - 2].max, tasksList.data[task.id - 1].max] = [tasksList.data[task.id - 1].max, tasksList.data[task.id - 2].max];
+
+                updateLocalStorageFromTasksList();
+                updateTasksListFromLocalStorage();
+                updateTaskTableFromTasksList();
+            });
+            tmpTaskPriorityTd.appendChild(buttonTaskPriority);
+        }
+        tmpTaskTr.appendChild(tmpTaskPriorityTd);
+
         tmpTaskTable.appendChild(tmpTaskTr);
     });
 
     divTaskTable.appendChild(tmpTaskTable);
 }
+
+function updateLocalStorageFromTaskTable() {
+    // console.log(tasksList.data);
+    const savingDataObjectArray = [];
+    for (let id = 1; id <= tasksList.data.length; id++) {
+        let tmpDataObject = {};
+        tmpDataObject.title = document.getElementById(`input-taskTitle${id}`).value;
+        tmpDataObject.min = document.getElementById(`input-taskMin${id}`).value;
+        tmpDataObject.max = document.getElementById(`input-taskMax${id}`).value;
+        savingDataObjectArray.push(tmpDataObject);
+    }
+    localStorage.setItem("tasks", JSON.stringify(savingDataObjectArray));
+}
+
+function updateLocalStorageFromTasksList() {
+    // console.log(tasksList.data);
+    const savingDataObjectArray = [];
+    tasksList.data.forEach((task) => {
+        let tmpDataObject = {};
+        tmpDataObject.title = task.title
+        tmpDataObject.min = task.min
+        tmpDataObject.max = task.max
+        savingDataObjectArray.push(tmpDataObject);
+    });
+    localStorage.setItem("tasks", JSON.stringify(savingDataObjectArray));
+}
+
+
+buttonNewTask.addEventListener("click", () => {
+    // console.log("New task button was clicked.");
+    if (inputNewTaskTitle.value != "") {
+        tasksList.add(new Task(inputNewTaskTitle.value, Number(inputNewTaskMax.value), Number(inputNewTaskMin.value), tasksList.data.length + 1, tasksList.data.length + 1));
+        inputNewTaskTitle.value = "";
+        inputNewTaskMin.value = "";
+        inputNewTaskMax.value = "";
+        updateTaskTableFromTasksList();
+        updateLocalStorageFromTaskTable();
+        // console.log(tasksList.data);
+    }
+});

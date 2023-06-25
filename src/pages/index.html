@@ -15,11 +15,28 @@
 
 <body>
     <h1>Late Saver</h1>
-    <a href="./edit_tasks.html">タスク追加・削除・編集ページ</a>
+    <!-- <a href="./edit_tasks.html">タスク追加・削除・編集ページ</a> -->
+    <label for="input-departureTime">出発時刻：</label>
+    <input type="time" id="input-departureTime">
+    <hr>
     <button id="button-wakeup">完全に起床した</button>
     <div id="div-thisMorningTasks"></div>
     <hr>
-    <a href="./edit_tasks.html">タスク追加・削除・編集ページ</a>
+    <details>
+        <summary>タスク編集</summary>
+        <div id="div-taskTable"></div>
+        <fieldset>
+            <legend>タスクを追加</legend>
+            <label for="input-newTaskTitle">タイトル：</label>
+            <input type="text" id="input-newTaskTitle">
+            <label for="input-newTaskMin">所要時間（最短）：</label>
+            <input type="number" id="input-newTaskMin">
+            <label for="input-newTaskMax">所要時間（最長）：</label>
+            <input type="number" id="input-newTaskMax">
+            <button id="button-newTask">追加</button>
+        </fieldset>
+    </details>
+    <!-- <a href="./edit_tasks.html">タスク追加・削除・編集ページ</a> -->
 </body>
 
 </html>
