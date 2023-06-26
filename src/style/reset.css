@@ -20,13 +20,11 @@
     block-size: 100%;
   }
 }
-
 @media (prefers-reduced-motion: no-preference) {
   :where(html:focus-within) {
     scroll-behavior: smooth;
   }
 }
-
 :where(body) {
   block-size: 100%;
   block-size: 100dvb;
@@ -65,12 +63,8 @@
   text-underline-offset: 0.2ex;
 }
 
-/* :where(ul, ol) {
+:where(ul, ol) {
   list-style: none;
-} */
-
-ol {
-  padding-left: 1em;
 }
 
 :where(img, svg, video, canvas, audio, iframe, embed, object) {
@@ -93,7 +87,7 @@ ol {
 :where(hr) {
   border: none;
   -webkit-border-before: 1px solid;
-  border-block-start: 1px solid;
+          border-block-start: 1px solid;
   color: inherit;
   block-size: 0;
   overflow: visible;
@@ -106,28 +100,11 @@ ol {
 
 :where(.visually-hidden:not(:focus, :active, :focus-within, .not-visually-hidden)) {
   -webkit-clip-path: inset(50%) !important;
-  clip-path: inset(50%) !important;
+          clip-path: inset(50%) !important;
   height: 1px !important;
   width: 1px !important;
   overflow: hidden !important;
   position: absolute !important;
   white-space: nowrap !important;
   border: 0 !important;
-}
-
-/*# sourceMappingURL=reset.css.map */
-
-table {
-  border-collapse: collapse;
-}
-
-table th,
-table td {
-  border: 0.1em solid;
-  text-align: center;
-}
-
-fieldset {
-  border: 0.1em solid;
-  margin: 1em;
-}
+}/*# sourceMappingURL=reset.css.map */
