@@ -37,7 +37,7 @@ export default class TimeAllocator {
         // 最小でもいけない場合はいけるようになるまで優先順位が低いものを削除し、最小の比率で分配する
         } else {
             while (minsum > availMinutes) {
-                this.tasksList.popMinPriority();
+                this.tasksList.popLowestPriority();
                 minsum = this.tasksList.minSum();
             }
             result = this.tasksList.data.map(task => [task, task.min as number]);

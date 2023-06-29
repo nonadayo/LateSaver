@@ -32,14 +32,14 @@ var TasksList = /** @class */ (function () {
     };
     // 優先順位が最も低いTaskを取り除いて取得する関数関数
     // 引数: 無
-    // 戻り値: 優先順位が最も低いTaskインスタンスもしくはundefind
-    TasksList.prototype.popMinPriority = function () {
+    // 戻り値: 優先順位の値が最も低いTaskインスタンスもしくはundefind
+    TasksList.prototype.popLowestPriority = function () {
         var targetIndex = -1;
         var targetTask = undefined;
-        var minPriority = this.getMinPriority();
+        var lowestPriority = this.getLowestPriority();
         for (var i = 0; i < this.data.length; i++) {
             var task = this.data[i];
-            if (task.priority === minPriority) {
+            if (task.priority === lowestPriority) {
                 targetIndex = i;
                 targetTask = task;
                 break;
@@ -89,8 +89,8 @@ var TasksList = /** @class */ (function () {
     // 最も低い優先順位を取得する関数
     // 引数: 無
     // 戻り値: 優先順位の最小値
-    TasksList.prototype.getMinPriority = function () {
-        var result = this.getMaxPriority();
+    TasksList.prototype.getLowestPriority = function () {
+        var result = this.getHighestPriority();
         this.data.forEach(function (task) {
             if (task.priority && task.priority < result) {
                 result = task.priority;
@@ -101,7 +101,7 @@ var TasksList = /** @class */ (function () {
     // 最も高い優先順位を取得する関数
     // 引数: 無
     // 戻り値: 優先順位の最大値
-    TasksList.prototype.getMaxPriority = function () {
+    TasksList.prototype.getHighestPriority = function () {
         var result = 0;
         this.data.forEach(function (task) {
             if (task.priority && task.priority > result) {
@@ -112,5 +112,4 @@ var TasksList = /** @class */ (function () {
     };
     return TasksList;
 }());
-// exports.default = TasksList;
-export default TasksList;
+exports.default = TasksList;

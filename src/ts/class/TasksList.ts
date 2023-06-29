@@ -33,14 +33,14 @@ export default class TasksList {
     }
     // 優先順位が最も低いTaskを取り除いて取得する関数関数
     // 引数: 無
-    // 戻り値: 優先順位が最も低いTaskインスタンスもしくはundefind
-    popMinPriority(): Task | undefined {
+    // 戻り値: 優先順位の値が最も低いTaskインスタンスもしくはundefind
+    popLowestPriority(): Task | undefined {
         let   targetIndex: number = -1;
         let   targetTask : Task | undefined = undefined;
-        const minPriority: number = this.getMinPriority();
+        const lowestPriority: number = this.getLowestPriority();
         for (let i=0; i<this.data.length; i++) {
             const task = this.data[i];
-            if (task.priority === minPriority) {
+            if (task.priority === lowestPriority) {
                 targetIndex = i;
                 targetTask = task;
                 break;
@@ -105,8 +105,8 @@ export default class TasksList {
     // 最も低い優先順位を取得する関数
     // 引数: 無
     // 戻り値: 優先順位の最小値
-    getMinPriority(): number {
-        let result: number = this.getMaxPriority();
+    getLowestPriority(): number {
+        let result: number = this.getHighestPriority();
         this.data.forEach(task => {
             if (task.priority && task.priority < result) {
                 result = task.priority;
@@ -117,7 +117,7 @@ export default class TasksList {
     // 最も高い優先順位を取得する関数
     // 引数: 無
     // 戻り値: 優先順位の最大値
-    getMaxPriority(): number {
+    getHighestPriority(): number {
         let result: number = 0;
         this.data.forEach(task => {
             if (task.priority && task.priority > result) {

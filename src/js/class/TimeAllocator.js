@@ -30,7 +30,7 @@ var TimeAllocator = /** @class */ (function () {
         }
         else {
             while (minsum > availMinutes) {
-                this.tasksList.popMinPriority();
+                this.tasksList.popLowestPriority();
                 minsum = this.tasksList.minSum();
             }
             result = this.tasksList.data.map(function (task) { return [task, task.min]; });
@@ -95,5 +95,4 @@ var TimeAllocator = /** @class */ (function () {
     };
     return TimeAllocator;
 }());
-// exports.default = TimeAllocator;
-export default TimeAllocator;
+exports.default = TimeAllocator;

@@ -15,5 +15,4 @@ var Task = /** @class */ (function () {
     };
     return Task;
 }());
-// exports.default = Task;
-export default Task;
+exports.default = Task;
