@@ -112,4 +112,5 @@ var TasksList = /** @class */ (function () {
     };
     return TasksList;
 }());
-exports.default = TasksList;
+// exports.default = TasksList;
+export default TasksList;
