@@ -8,10 +8,9 @@ const inputNewTaskMax = document.getElementById("input-newTaskMax");
 const buttonNewTask = document.getElementById("button-newTask");
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM content was loaded.");
+    // console.log("DOM content was loaded.");
     updateTasksListFromLocalStorage();
     updateTaskTableFromTasksList();
-    // updateLocalStorageFromTaskTable();
 });
 
 function updateTasksListFromLocalStorage() {
@@ -19,15 +18,15 @@ function updateTasksListFromLocalStorage() {
     //もし、localStorageに「tasks」がなければ「tasksObjectArray」には「null」が入る
     const tasksObjectArray = JSON.parse(localStorage.getItem("tasks"));
     tasksList = new TasksList();
-    if (tasksObjectArray !== null) {
+    if (tasksObjectArray) {
         let tmpTaskIndex = 1;//読み込んだタスクの順番
         tasksObjectArray.forEach((task) => {
             //優先順位とIDは読み込んだ順にする
-            tasksList.add(new Task(task.title, task.max, task.min, tmpTaskIndex, tmpTaskIndex++));
+            tasksList.add(new Task(task.title, Number(task.max), Number(task.min), tmpTaskIndex, tmpTaskIndex++));
         });
-        console.log(`There are ${tasksList.data.length} task(s).`);
+        // console.log(`There are ${tasksList.data.length} task(s).`);
     } else {
-        console.log("There are no localStorage data.");
+        // console.log("There are no localStorage data.");
     }
 }
 
@@ -143,7 +142,7 @@ function updateTaskTableFromTasksList() {
 }
 
 function updateLocalStorageFromTaskTable() {
-    console.log(tasksList.data);
+    // console.log(tasksList.data);
     const savingDataObjectArray = [];
     for (let id = 1; id <= tasksList.data.length; id++) {
         let tmpDataObject = {};
@@ -156,7 +155,7 @@ function updateLocalStorageFromTaskTable() {
 }
 
 function updateLocalStorageFromTasksList() {
-    console.log(tasksList.data);
+    // console.log(tasksList.data);
     const savingDataObjectArray = [];
     tasksList.data.forEach((task) => {
         let tmpDataObject = {};
@@ -170,7 +169,7 @@ function updateLocalStorageFromTasksList() {
 
 
 buttonNewTask.addEventListener("click", () => {
-    console.log("New task button was clicked.");
+    // console.log("New task button was clicked.");
     if (inputNewTaskTitle.value != "") {
         tasksList.add(new Task(inputNewTaskTitle.value, Number(inputNewTaskMax.value), Number(inputNewTaskMin.value), tasksList.data.length + 1, tasksList.data.length + 1));
         inputNewTaskTitle.value = "";
@@ -178,6 +177,6 @@ buttonNewTask.addEventListener("click", () => {
         inputNewTaskMax.value = "";
         updateTaskTableFromTasksList();
         updateLocalStorageFromTaskTable();
-        console.log(tasksList.data);
+        // console.log(tasksList.data);
     }
 });
