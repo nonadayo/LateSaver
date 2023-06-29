@@ -95,4 +95,5 @@ var TimeAllocator = /** @class */ (function () {
     };
     return TimeAllocator;
 }());
-exports.default = TimeAllocator;
+// exports.default = TimeAllocator;
+export default TimeAllocator;
