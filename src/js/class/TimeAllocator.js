@@ -30,7 +30,7 @@ var TimeAllocator = /** @class */ (function () {
         }
         else {
             while (minsum > availMinutes) {
-                this.tasksList.popLowestPriority();
+                this.tasksList.popHighestPriority();
                 minsum = this.tasksList.minSum();
             }
             result = this.tasksList.data.map(function (task) { return [task, task.min]; });

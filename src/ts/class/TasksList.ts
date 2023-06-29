@@ -34,6 +34,26 @@ export default class TasksList {
     // 優先順位が最も低いTaskを取り除いて取得する関数関数
     // 引数: 無
     // 戻り値: 優先順位の値が最も低いTaskインスタンスもしくはundefind
+    popHighestPriority(): Task | undefined {
+        let   targetIndex: number = -1;
+        let   targetTask : Task | undefined = undefined;
+        const lowestPriority: number = this.getHighestPriority();
+        for (let i=0; i<this.data.length; i++) {
+            const task = this.data[i];
+            if (task.priority === lowestPriority) {
+                targetIndex = i;
+                targetTask = task;
+                break;
+            }
+        }
+        if (targetIndex !== -1) {
+            this.data.splice(targetIndex, 1);
+        }
+        return targetTask;
+    }
+    // 優先順位が最も低いTaskを取り除いて取得する関数関数
+    // 引数: 無
+    // 戻り値: 優先順位の値が最も低いTaskインスタンスもしくはundefind
     popLowestPriority(): Task | undefined {
         let   targetIndex: number = -1;
         let   targetTask : Task | undefined = undefined;

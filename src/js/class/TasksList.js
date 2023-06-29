@@ -33,6 +33,26 @@ var TasksList = /** @class */ (function () {
     // 優先順位が最も低いTaskを取り除いて取得する関数関数
     // 引数: 無
     // 戻り値: 優先順位の値が最も低いTaskインスタンスもしくはundefind
+    TasksList.prototype.popHighestPriority = function () {
+        var targetIndex = -1;
+        var targetTask = undefined;
+        var lowestPriority = this.getHighestPriority();
+        for (var i = 0; i < this.data.length; i++) {
+            var task = this.data[i];
+            if (task.priority === lowestPriority) {
+                targetIndex = i;
+                targetTask = task;
+                break;
+            }
+        }
+        if (targetIndex !== -1) {
+            this.data.splice(targetIndex, 1);
+        }
+        return targetTask;
+    };
+    // 優先順位が最も低いTaskを取り除いて取得する関数関数
+    // 引数: 無
+    // 戻り値: 優先順位の値が最も低いTaskインスタンスもしくはundefind
     TasksList.prototype.popLowestPriority = function () {
         var targetIndex = -1;
         var targetTask = undefined;
