@@ -1,0 +1,17 @@
+・グラデーションの生成
+https://cssgradient.io/
+
+・色生成
+https://www.schemecolor.com/
+
+・boxシャドウのCSS生成
+https://getcssscan.com/css-box-shadow-examples
+
+・テキストシャドウのCSS生成
+https://www.bad-company.jp/text-shadow
+
+・SVGアニメーションの生成
+https://www.bad-company.jp/text-shadow
+
+・ロゴメーカー
+https://ja.wix.com/logo/maker
