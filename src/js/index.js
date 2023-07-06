@@ -7,9 +7,12 @@ import { Task, TasksList, Time, TimeAllocator } from "./class/index.js";
 // allocator.allocate()
 // console.log(allocator.result)
 
-let tasksList;
+let tasksListOfLocalStorage;
 let departureTime;
+let thisMorningTasksArray = [];
+let thisMorningPresentTaskIndex = 0;
 
+const divDepartureTimeInputAndPresentTask = document.getElementById("div-departureTimeInputAndPresentTask");
 const inputDepartureTime = document.getElementById("input-departureTime");
 const buttonWakeup = document.getElementById("button-wakeup");
 const divThisMorningTasks = document.getElementById("div-thisMorningTasks");
@@ -18,6 +21,15 @@ const divThisMorningTasks = document.getElementById("div-thisMorningTasks");
 // const inputNewTaskMin = document.getElementById("input-newTaskMin");
 // const inputNewTaskMax = document.getElementById("input-newTaskMax");
 // const buttonNewTask = document.getElementById("button-newTask");
+
+const color = {
+    text: {
+        button: "#3A4909",
+    },
+    background: {
+        general: "#FDFAE9",
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     // console.log("DOM content was loaded.");
@@ -44,6 +56,7 @@ inputDepartureTime.addEventListener("input", (e) => {
 });
 
 buttonWakeup.addEventListener("click", () => {
+    // console.log("Wakeup button was clicked.");
     //いったん「divThisMorningTasks」の中身をすべて削除
     while (divThisMorningTasks.firstChild) {
         divThisMorningTasks.removeChild(divThisMorningTasks.firstChild);
@@ -56,12 +69,12 @@ buttonWakeup.addEventListener("click", () => {
     if (0 < departureTime.differFrom(nowTime).getValAsMin()) {
         //「現在時刻<出発時刻」の場合
         const tasksListForAllocate = new TasksList();
-        tasksListForAllocate.data = Array.from(tasksList.data);
+        tasksListForAllocate.data = Array.from(tasksListOfLocalStorage.data);
         // console.log(tasksList.data);
         // console.log(tasksListForAllocate.data);
         const allocator = new TimeAllocator(nowTime, departureTime, tasksListForAllocate);
         allocator.allocate();
-        const thisMorningTasksArray = allocator.result;
+        thisMorningTasksArray = allocator.result;
         // console.log(thisMorningTasksArray);
         thisMorningTasksArray.forEach((task) => {
             const tmpTaskLi = document.createElement("li");
@@ -69,6 +82,8 @@ buttonWakeup.addEventListener("click", () => {
             tmpTaskOl.appendChild(tmpTaskLi);
         });
         divThisMorningTasks.appendChild(tmpTaskOl);
+
+        updatePresentTask();
     }
 });
 
@@ -76,15 +91,49 @@ function updateTasksListFromLocalStorage() {
     //localStorageにJSON文字列として保管しておいたタスク「tasks」を取り出し、配列に変換
     //もし、localStorageに「tasks」がなければ「tasksObjectArray」には「null」が入る
     const tasksObjectArray = JSON.parse(localStorage.getItem("tasks"));
-    tasksList = new TasksList();
+    tasksListOfLocalStorage = new TasksList();
     if (tasksObjectArray) {
         let tmpTaskIndex = 1;//読み込んだタスクの順番
         tasksObjectArray.forEach((task) => {
             //優先順位とIDは読み込んだ順にする
-            tasksList.add(new Task(task.title, Number(task.max), Number(task.min), tmpTaskIndex, tmpTaskIndex++));
+            tasksListOfLocalStorage.add(new Task(task.title, Number(task.max), Number(task.min), tmpTaskIndex, tmpTaskIndex++));
         });
         // console.log(`There are ${tasksList.data.length} task(s).`);
     } else {
         // console.log("There are no localStorage data.");
     }
+}
+
+function updatePresentTask() {
+    //いったん「divDepartureTimeInputAndPresentTask」の中身をすべて削除
+    while (divDepartureTimeInputAndPresentTask.firstChild) {
+        divDepartureTimeInputAndPresentTask.removeChild(divDepartureTimeInputAndPresentTask.firstChild);
+    }
+
+    const divClock = document.createElement("div");//時計が入るdiv
+    /*
+    時計作成
+     */
+    divDepartureTimeInputAndPresentTask.appendChild(divClock);
+
+    if (thisMorningPresentTaskIndex + 1 < thisMorningTasksArray.length) {
+        const buttonNextTask = document.createElement("button");
+        // buttonNextTask.setAttribute("style", `color: ${color.text.button}; background-color: ${color.background.general};`);
+        buttonNextTask.setAttribute("id", "button-wakeup");
+        buttonNextTask.textContent = "Next >>";
+        buttonNextTask.addEventListener("click", () => {
+            thisMorningPresentTaskIndex++;
+            updatePresentTask();
+        });
+        divDepartureTimeInputAndPresentTask.appendChild(buttonNextTask);
+    }
+
+    const pTaskTime = document.createElement("p");
+    pTaskTime.textContent = `${thisMorningTasksArray[thisMorningPresentTaskIndex][1].getStr()}　～　${thisMorningTasksArray[thisMorningPresentTaskIndex][2].getStr()}`;
+    pTaskTime.setAttribute("style", "font-weight: 900;");
+    divDepartureTimeInputAndPresentTask.appendChild(pTaskTime);
+
+    const pTaskTitle = document.createElement("p");
+    pTaskTitle.textContent = thisMorningTasksArray[thisMorningPresentTaskIndex][0].title;
+    divDepartureTimeInputAndPresentTask.appendChild(pTaskTitle);
 }

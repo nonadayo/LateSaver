@@ -10,18 +10,21 @@
     <script type="module" src="../js/index.js"></script>
     <!-- cssファイルの読み込み -->
     <link rel="stylesheet" href="../style/reset.css">
+    <link rel="stylesheet" href="../style/index.css">
     <title>LateSaver</title>
 </head>
 
 <body>
     <h1>Late Saver</h1>
     <a href="./edit_tasks.html">タスク追加・削除・編集ページ</a>
-    <label for="input-departureTime">出発時刻：</label>
-    <input type="time" id="input-departureTime">
-    <hr>
-    <button id="button-wakeup">完全に起床した</button>
+    <div id="div-departureTimeInputAndPresentTask">
+        <p>おはようございます！</p>
+        <br>
+        <label for="input-departureTime">出発時間を入力してください</label>
+        <input type="time" id="input-departureTime">
+        <button id="button-wakeup">Start</button>
+    </div>
     <div id="div-thisMorningTasks"></div>
-    <hr>
     <!-- <details>
         <summary>タスク編集</summary>
         <div id="div-taskTable"></div>
@@ -36,7 +39,6 @@
             <button id="button-newTask">追加</button>
         </fieldset>
     </details> -->
-    <a href="./edit_tasks.html">タスク追加・削除・編集ページ</a>
 </body>
 
 </html>
