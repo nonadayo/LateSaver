@@ -10,6 +10,7 @@
     <script type="module" src="../js/index.js"></script>
     <!-- cssファイルの読み込み -->
     <link rel="stylesheet" href="../style/reset.css">
+    <link rel="stylesheet" href="../style/indexe.css">
     <link rel="stylesheet" href="../style/index.css">
     <title>LateSaver</title>
 </head>
@@ -32,11 +33,11 @@
     
 
     <!-- 現在のタスク表示欄 -->
-    <div id="div-presentTaskWrapper">
-        <div class="presentTaskWrapper__timeLimitAndNextBtn">
-            <div id="presentTaskWrapper__timeLimitViewBox">
-                <div id="presentTaskWrapper__timeLimitViewBox--timeLimit"></div>
-                <div id="presentTaskWrapper__timeLimitViewBox--onProcess"></div>
+    <div id="presentTaskWrapper">
+        <div id="presentTaskWrapper__timeLimitAndNextBtn">
+            <div id="presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox">
+                <div id="onProcess"></div>
+                <div id="timeLimit"></div>
             </div>
             <div id="button-wakeup"></div>
         </div>
