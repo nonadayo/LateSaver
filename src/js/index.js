@@ -16,7 +16,7 @@ const divDepartureTimeInput = document.getElementById("div-departureTimeInput");
 const inputDepartureTime = document.getElementById("input-departureTime");
 const buttonWakeup = document.getElementById("button-wakeup");
 const divThisMorningTasks = document.getElementById("div-thisMorningTasks");
-const divPresentTaskWrapper = document.getElementById("div-presentTaskWrapper");
+const presentTaskWrapper = document.getElementById("presentTaskWrapper");
 const buttonNextTask = document.getElementById("button-nextTask");
 const divPresentTaskWrapper__timeView__startTime = document.getElementById("div-presentTaskWrapper__timeView--startTime");
 const divPresentTaskWrapper__timeView__delimiter = document.getElementById("div-presentTaskWrapper__timeView--delimiter");
@@ -82,7 +82,7 @@ function startTasks() {
             alert("出発時間までに行えるタスクが1つもありません");
         } else {
             divDepartureTimeInput.setAttribute("style", "display: none;");
-            divPresentTaskWrapper.setAttribute("style", "display: block;");
+            presentTaskWrapper.setAttribute("style", "display: block;");
             thisMorningTasksArray.forEach((task) => {
                 const tmpTaskLi = document.createElement("li");
                 tmpTaskLi.textContent = `${task[0].title}（${task[1].getStr()}～${task[2].getStr()}）`;
