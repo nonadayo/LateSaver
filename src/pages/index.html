@@ -17,6 +17,10 @@
 <body>
     <h1>Late Saver</h1>
     <a href="./edit_tasks.html">タスク追加・削除・編集ページ</a>
+
+
+
+    <!-- ユーザー入力欄 -->
     <div id="div-departureTimeInputAndPresentTask">
         <p>おはようございます！</p>
         <br>
@@ -24,6 +28,26 @@
         <input type="time" id="input-departureTime">
         <button id="button-wakeup">Start</button>
     </div>
+
+    
+
+    <!-- 現在のタスク表示欄 -->
+    <div id="div-presentTaskWrapper">
+        <div class="presentTaskWrapper__timeLimitAndNextBtn">
+            <div id="presentTaskWrapper__timeLimitViewBox">
+                <div id="presentTaskWrapper__timeLimitViewBox--timeLimit"></div>
+                <div id="presentTaskWrapper__timeLimitViewBox--onProcess"></div>
+            </div>
+            <div id="button-wakeup"></div>
+        </div>
+        <div id="div-presentTaskWrapper__timeView">
+            <span className="div-presentTaskWrapper__timeView--startTime"></span>
+            <span className="div-presentTaskWrapper__timeView--delimiter">～</span>
+            <span className="div-presentTaskWrapper__timeView--endTime"></span>
+        </div>
+        <p id="div-presentTaskWrapper__titleView"></p>
+    </div>
+
     <div id="div-thisMorningTasks"></div>
     <!-- <details>
         <summary>タスク編集</summary>
