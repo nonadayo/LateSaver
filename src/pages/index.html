@@ -21,29 +21,29 @@
 
 
     <!-- ユーザー入力欄 -->
-    <div id="div-departureTimeInputAndPresentTask">
+    <div id="div-departureTimeInput" class="div-mainBox">
         <p>おはようございます！</p>
         <br>
         <label for="input-departureTime">出発時間を入力してください</label>
         <input type="time" id="input-departureTime">
-        <button id="button-wakeup">Start</button>
+        <button id="button-wakeup" class="button-main">Start</button>
     </div>
 
-    
+
 
     <!-- 現在のタスク表示欄 -->
-    <div id="div-presentTaskWrapper">
-        <div class="presentTaskWrapper__timeLimitAndNextBtn">
-            <div id="presentTaskWrapper__timeLimitViewBox">
-                <div id="presentTaskWrapper__timeLimitViewBox--timeLimit"></div>
-                <div id="presentTaskWrapper__timeLimitViewBox--onProcess"></div>
+    <div id="div-presentTaskWrapper" style="display: none;" class="div-mainBox">
+        <div id="presentTaskWrapper__timeLimitAndNextBtn">
+            <div id="presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox">
+                <div id="onProcess"></div>
+                <div id="timeLimit"></div>
             </div>
-            <div id="button-wakeup"></div>
+            <button id="button-nextTask" class="button-main">Next>></button>
         </div>
         <div id="div-presentTaskWrapper__timeView">
-            <span className="div-presentTaskWrapper__timeView--startTime"></span>
-            <span className="div-presentTaskWrapper__timeView--delimiter">～</span>
-            <span className="div-presentTaskWrapper__timeView--endTime"></span>
+            <span id="div-presentTaskWrapper__timeView--startTime"></span>
+            <span id="div-presentTaskWrapper__timeView--delimiter">～</span>
+            <span id="div-presentTaskWrapper__timeView--endTime"></span>
         </div>
         <p id="div-presentTaskWrapper__titleView"></p>
     </div>

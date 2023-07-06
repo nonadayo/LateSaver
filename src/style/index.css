@@ -12,7 +12,7 @@ body {
     flex-direction: column;
 }
 
-#div-departureTimeInputAndPresentTask {
+.div-mainBox {
     margin: auto;
     padding-top: 1em;
     padding-bottom: 1em;
@@ -32,7 +32,7 @@ body {
     margin-right: auto;
 }
 
-#button-wakeup {
+.button-main {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     padding-left: 1.5em;
@@ -44,6 +44,6 @@ body {
     border-radius: 1em;
 }
 
-#div-thisMorningTasks{
+#div-thisMorningTasks {
     margin: auto;
 }
