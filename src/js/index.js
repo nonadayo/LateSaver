@@ -1,4 +1,4 @@
-import { Task, TasksList, Time, TimeAllocator } from "./class/index.js";
+import { Task, TasksList, Time, TimeAllocator } from "../class/index.js";
 // tasksList.add(new Task("test0", 60, 10, 0, 0));
 // tasksList.add(new Task("test1", 50, 5, 0, 0));
 // tasksList.add(new Task("test2", 40, 20, 0, 0));
@@ -137,3 +137,27 @@ function updatePresentTask() {
     pTaskTitle.textContent = thisMorningTasksArray[thisMorningPresentTaskIndex][0].title;
     divDepartureTimeInputAndPresentTask.appendChild(pTaskTitle);
 }
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////
+// 時計の描画処理用関数
+//////////////////////////////////////////////////////////////////////
+// 時計の中身の描画を更新する関数
+// 引数: なし
+// 戻り値: なし
+function timeLimitViewRender() {
+    const timeLimitOnTask = []; // 現在のタスクの残り時間をdegで格納 [0, 10] など。
+    const timeLimit = [];       // 現在のタスクを含めない残り時間をdegで格納 [10, 30] など。
+    // タスクのデータからtimeLimitOnTaskとtimeLimitを計算する関数
+    const tasksData = []
+    console.log(thisMorningTasksArray);
+}
+timeLimitViewRender()
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+

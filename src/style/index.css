@@ -1,3 +1,14 @@
+#div-departureTimeInputAndPresentTask.visible, #presentTaskWrapper.visible {
+  display: flex;
+}
+#div-departureTimeInputAndPresentTask.invisible, #presentTaskWrapper.invisible {
+  display: none;
+}
+
+#div-departureTimeInputAndPresentTask #input-departureTime {
+  color: #000000;
+}
+
 #presentTaskWrapper {
   display: flex;
   flex-direction: column;
@@ -6,8 +17,19 @@
   display: flex;
 }
 #presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox {
+  position: relative;
   width: 120px;
   height: 120px;
-  border: #FFFFFF;
+  border: 1px solid #FFFFFF;
   border-radius: 50%;
+  background-color: inherit;
+  overflow: hidden;
+}
+#presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox #onProcess, #presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox #timeLimit {
+  background-color: #759411;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=index.css.map */
