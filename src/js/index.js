@@ -12,15 +12,16 @@ let departureTime;
 let thisMorningTasksArray = [];
 let thisMorningPresentTaskIndex = 0;
 
-const divDepartureTimeInputAndPresentTask = document.getElementById("div-departureTimeInputAndPresentTask");
+const divDepartureTimeInput = document.getElementById("div-departureTimeInput");
 const inputDepartureTime = document.getElementById("input-departureTime");
 const buttonWakeup = document.getElementById("button-wakeup");
 const divThisMorningTasks = document.getElementById("div-thisMorningTasks");
-// const divTaskTable = document.getElementById("div-taskTable");
-// const inputNewTaskTitle = document.getElementById("input-newTaskTitle");
-// const inputNewTaskMin = document.getElementById("input-newTaskMin");
-// const inputNewTaskMax = document.getElementById("input-newTaskMax");
-// const buttonNewTask = document.getElementById("button-newTask");
+const presentTaskWrapper = document.getElementById("presentTaskWrapper");
+const buttonNextTask = document.getElementById("button-nextTask");
+const divPresentTaskWrapper__timeView__startTime = document.getElementById("div-presentTaskWrapper__timeView--startTime");
+const divPresentTaskWrapper__timeView__delimiter = document.getElementById("div-presentTaskWrapper__timeView--delimiter");
+const divPresentTaskWrapper__timeView__endTime = document.getElementById("div-presentTaskWrapper__timeView--endTime");
+const divPresentTaskWrapper__titleView = document.getElementById("div-presentTaskWrapper__titleView");
 
 const color = {
     text: {
@@ -34,7 +35,6 @@ const color = {
 document.addEventListener("DOMContentLoaded", () => {
     // console.log("DOM content was loaded.");
     updateTasksListFromLocalStorage();
-    // updateTaskTableFromTasksList();
 
     const lsDepartureTimeString = localStorage.getItem("departureTime");
     if (lsDepartureTimeString) {
@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
         departureTime = timeStringToTimeInstance(lsDepartureTimeString);
         // console.log(departureTime);
     }
+    buttonWakeup.addEventListener("click", startTasks);
+    buttonNextTask.addEventListener("click", nextTask);
 });
 
 function timeStringToTimeInstance(timeString) {
@@ -55,7 +57,7 @@ inputDepartureTime.addEventListener("input", (e) => {
     departureTime = timeStringToTimeInstance(e.target.value);
 });
 
-buttonWakeup.addEventListener("click", () => {
+function startTasks() {
     // console.log("Wakeup button was clicked.");
     //いったん「divThisMorningTasks」の中身をすべて削除
     while (divThisMorningTasks.firstChild) {
@@ -76,16 +78,23 @@ buttonWakeup.addEventListener("click", () => {
         allocator.allocate();
         thisMorningTasksArray = allocator.result;
         // console.log(thisMorningTasksArray);
-        thisMorningTasksArray.forEach((task) => {
-            const tmpTaskLi = document.createElement("li");
-            tmpTaskLi.textContent = `${task[0].title}（${task[1].getStr()}～${task[2].getStr()}）`;
-            tmpTaskOl.appendChild(tmpTaskLi);
-        });
-        divThisMorningTasks.appendChild(tmpTaskOl);
-
-        updatePresentTask();
+        if (thisMorningTasksArray.length === 0) {
+            alert("出発時間までに行えるタスクが1つもありません");
+        } else {
+            divDepartureTimeInput.setAttribute("style", "display: none;");
+            presentTaskWrapper.setAttribute("style", "display: block;");
+            thisMorningTasksArray.forEach((task) => {
+                const tmpTaskLi = document.createElement("li");
+                tmpTaskLi.textContent = `${task[0].title}（${task[1].getStr()}～${task[2].getStr()}）`;
+                tmpTaskOl.appendChild(tmpTaskLi);
+            });
+            divThisMorningTasks.appendChild(tmpTaskOl);
+            updatePresentTask();
+        }
+    } else {
+        alert("出発時間が現在時刻の後になるように設定してください");
     }
-});
+}
 
 function updateTasksListFromLocalStorage() {
     //localStorageにJSON文字列として保管しておいたタスク「tasks」を取り出し、配列に変換
@@ -105,37 +114,29 @@ function updateTasksListFromLocalStorage() {
 }
 
 function updatePresentTask() {
-    //いったん「divDepartureTimeInputAndPresentTask」の中身をすべて削除
-    while (divDepartureTimeInputAndPresentTask.firstChild) {
-        divDepartureTimeInputAndPresentTask.removeChild(divDepartureTimeInputAndPresentTask.firstChild);
+    // console.log(`updatePresentTask(); thisMorningPresentTaskIndex: ${thisMorningPresentTaskIndex}`);
+    if (thisMorningPresentTaskIndex <= thisMorningTasksArray.length) {
+        divPresentTaskWrapper__timeView__startTime.textContent = thisMorningTasksArray[thisMorningPresentTaskIndex][1].getStr();
+        divPresentTaskWrapper__timeView__endTime.textContent = thisMorningTasksArray[thisMorningPresentTaskIndex][2].getStr();
+        divPresentTaskWrapper__titleView.textContent = thisMorningTasksArray[thisMorningPresentTaskIndex][0].title;
+        if (thisMorningPresentTaskIndex + 1 === thisMorningTasksArray.length) {
+            buttonNextTask.removeEventListener("click", nextTask);
+            buttonNextTask.addEventListener("click", departrue);
+            buttonNextTask.textContent = "Let's Go!";
+        }
     }
+}
 
-    const divClock = document.createElement("div");//時計が入るdiv
-    /*
-    時計作成
-     */
-    divDepartureTimeInputAndPresentTask.appendChild(divClock);
+function nextTask() {
+    thisMorningPresentTaskIndex++;
+    updatePresentTask();
+}
 
-    if (thisMorningPresentTaskIndex + 1 < thisMorningTasksArray.length) {
-        const buttonNextTask = document.createElement("button");
-        // buttonNextTask.setAttribute("style", `color: ${color.text.button}; background-color: ${color.background.general};`);
-        buttonNextTask.setAttribute("id", "button-wakeup");
-        buttonNextTask.textContent = "Next >>";
-        buttonNextTask.addEventListener("click", () => {
-            thisMorningPresentTaskIndex++;
-            updatePresentTask();
-        });
-        divDepartureTimeInputAndPresentTask.appendChild(buttonNextTask);
-    }
-
-    const pTaskTime = document.createElement("p");
-    pTaskTime.textContent = `${thisMorningTasksArray[thisMorningPresentTaskIndex][1].getStr()}　～　${thisMorningTasksArray[thisMorningPresentTaskIndex][2].getStr()}`;
-    pTaskTime.setAttribute("style", "font-weight: 900;");
-    divDepartureTimeInputAndPresentTask.appendChild(pTaskTime);
-
-    const pTaskTitle = document.createElement("p");
-    pTaskTitle.textContent = thisMorningTasksArray[thisMorningPresentTaskIndex][0].title;
-    divDepartureTimeInputAndPresentTask.appendChild(pTaskTitle);
+function departrue() {
+    thisMorningPresentTaskIndex++;
+    buttonNextTask.setAttribute("style", "display: none;");
+    divPresentTaskWrapper__timeView__startTime.textContent = divPresentTaskWrapper__timeView__delimiter.textContent = divPresentTaskWrapper__timeView__endTime.textContent = "";
+    divPresentTaskWrapper__titleView.textContent = "行ってらっしゃい！";
 }
 
 
