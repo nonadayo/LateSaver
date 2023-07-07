@@ -5,9 +5,15 @@ export default class Time {
     minutes: number;
 
     // 引数: 時間, 分を渡す
-    constructor(hours: number, minutes: number) {
-        this.hours   = hours;
-        this.minutes = minutes;
+    constructor(hours?: number, minutes?: number) {
+        if (hours !== undefined && minutes !== undefined) {
+            this.hours   = hours;
+            this.minutes = minutes;
+        } else {
+            const now    = new Date();
+            this.hours   = now.getHours();
+            this.minutes = now.getMinutes()
+        }
     }
 
 

@@ -5,8 +5,15 @@
 var Time = /** @class */ (function () {
     // 引数: 時間, 分を渡す
     function Time(hours, minutes) {
-        this.hours = hours;
-        this.minutes = minutes;
+        if (hours !== undefined && minutes !== undefined) {
+            this.hours = hours;
+            this.minutes = minutes;
+        }
+        else {
+            var now = new Date();
+            this.hours = now.getHours();
+            this.minutes = now.getMinutes();
+        }
     }
     /////////////////////////////////////////////////////////////////////////////////
     // 取得関数群

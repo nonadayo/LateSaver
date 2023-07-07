@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- moduleの読み込み type="module"としないとimportが使えないので注意-->
     <script type="module" src="../js/class/index.js"></script>
-    <script type="module" src="../js/index/index.js"></script>
+    <script type="module" src="../js/index.js"></script>
     <!-- cssファイルの読み込み -->
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/index.css">
@@ -21,7 +21,7 @@
 
 
     <!-- ユーザー入力欄 -->
-    <div id="div-departureTimeInput" class="div-mainBox">
+    <div id="div-departureTimeInput" class="div-mainBox visible">
         <p>おはようございます！</p>
         <br>
         <label for="input-departureTime">出発時間を入力してください</label>
@@ -32,12 +32,9 @@
 
 
     <!-- 現在のタスク表示欄 -->
-    <div id="presentTaskWrapper" style="display: none;" class="div-mainBox">
+    <div id="presentTaskWrapper" class="div-mainBox invisible">
         <div id="presentTaskWrapper__timeLimitAndNextBtn">
-            <div id="presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox">
-                <div id="onProcess"></div>
-                <div id="timeLimit"></div>
-            </div>
+            <div id="presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox"></div>
             <button id="button-nextTask" class="button-main">Next>></button>
         </div>
         <div id="div-presentTaskWrapper__timeView">

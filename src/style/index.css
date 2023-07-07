@@ -1,46 +1,76 @@
-#presentTaskWrapper {
+html {
+  background-color: #FDFAE9;
+  color: black;
+}
+
+body {
+  background-image: url("../img/index/bgImage.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position-y: center;
   display: flex;
   flex-direction: column;
 }
 
-.div-mainBox {
-    margin: auto;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    padding-left: 3em;
-    padding-right: 3em;
-    color: white;
-    text-align: center;
-    border-radius: 2em;
-    background-color: rgba(0, 0, 0, 0.59);
+#div-departureTimeInputAndPresentTask {
+  margin: auto;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 3em;
+  padding-right: 3em;
+  color: white;
+  text-align: center;
+  border-radius: 2em;
+  background-color: rgba(0, 0, 0, 0.59);
 }
 
 #input-departureTime {
-    display: flex;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
+  display: flex;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.button-main {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
-    margin: 0.5em;
-    background-color: #FDFAE9;
-    color: #3A4909;
-    font-weight: 900;
-    border-radius: 1em;
+#button-wakeup {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  margin: 0.5em;
+  background-color: #FDFAE9;
+  color: #3A4909;
+  font-weight: 900;
+  border-radius: 1em;
 }
 
 #div-thisMorningTasks {
-    margin: auto;
+  margin: auto;
+}
+
+#div-departureTimeInput.visible, #presentTaskWrapper.visible {
+  display: flex;
+}
+#div-departureTimeInput.invisible, #presentTaskWrapper.invisible {
+  display: none;
+}
+
+#div-departureTimeInput #input-departureTime {
+  color: #000000;
+}
+
+#presentTaskWrapper {
+  display: flex;
+  flex-direction: column;
+}
+#presentTaskWrapper__timeLimitAndNextBtn {
+  display: flex;
 }
 #presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox {
+  position: relative;
   width: 120px;
   height: 120px;
-  border: #FFFFFF;
+  border: 1px solid #FFFFFF;
   border-radius: 50%;
+  transition: all 1s ease-in-out;
 }/*# sourceMappingURL=index.css.map */
