@@ -29,6 +29,7 @@
   block-size: 100%;
   block-size: 100dvb;
   line-height: 1.5;
+  letter-spacing: 0.05em;
   font-family: system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -56,7 +57,7 @@
 }
 
 :where(button) {
-  border-style: solid;
+  border: none;
 }
 
 :where(a) {
@@ -107,4 +108,8 @@
   position: absolute !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+
+img {
+  max-width: 100%;
 }/*# sourceMappingURL=reset.css.map */

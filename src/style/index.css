@@ -1,70 +1,112 @@
 html {
   background-color: #FDFAE9;
-  color: black;
 }
 
 body {
-  background-image: url("../img/index/bgImage.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position-y: center;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
-}
-
-#div-departureTimeInputAndPresentTask {
+  align-items: center;
   margin: auto;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  padding-left: 3em;
-  padding-right: 3em;
-  color: white;
-  text-align: center;
-  border-radius: 2em;
-  background-color: rgba(0, 0, 0, 0.59);
 }
 
-#input-departureTime {
-  display: flex;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#button-wakeup {
+.button-main {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   padding-left: 1.5em;
   padding-right: 1.5em;
-  margin: 0.5em;
+  font-size: 0.8rem;
+  height: 40px;
+  width: 100px;
   background-color: #FDFAE9;
   color: #3A4909;
   font-weight: 900;
   border-radius: 1em;
+  transition: all 0.1s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.button-main:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #FDFAE9;
+  transform: translateY(-1px);
+}
+.button-main:active {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #FDFAE9;
+  transform: translateY(3px);
+  box-shadow: none;
 }
 
-#div-thisMorningTasks {
-  margin: auto;
+#pageContentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
 }
 
-#div-departureTimeInput.visible, #presentTaskWrapper.visible {
+#centerViewBox {
+  position: relative;
+  top: 50vh;
+  transform: translateY(-50%);
+  width: 100%;
+}
+#centerViewBox #backgroundImage {
+  z-index: 0;
+}
+#centerViewBox #div-departureTimeInput, #centerViewBox #presentTaskWrapper {
+  z-index: 1;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 16px 48px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  min-width: 200px;
+  min-height: 130px;
+}
+#centerViewBox #div-departureTimeInput.visible, #centerViewBox #presentTaskWrapper.visible {
   display: flex;
 }
-#div-departureTimeInput.invisible, #presentTaskWrapper.invisible {
+#centerViewBox #div-departureTimeInput.invisible, #centerViewBox #presentTaskWrapper.invisible {
   display: none;
 }
 
+#div-departureTimeInput {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#div-departureTimeInput p:nth-child(1) {
+  margin-bottom: 12px;
+}
 #div-departureTimeInput #input-departureTime {
+  margin-top: 4px;
   color: #000000;
+}
+#div-departureTimeInput #button-wakeup {
+  margin-top: 12px;
 }
 
 #presentTaskWrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  font-weight: bold;
 }
 #presentTaskWrapper__timeLimitAndNextBtn {
   display: flex;
+  align-items: end;
+  gap: 24px;
 }
 #presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox {
   position: relative;
@@ -73,4 +115,7 @@ body {
   border: 1px solid #FFFFFF;
   border-radius: 50%;
   transition: all 1s ease-in-out;
+}
+#presentTaskWrapper__timeView {
+  margin-top: 24px;
 }/*# sourceMappingURL=index.css.map */

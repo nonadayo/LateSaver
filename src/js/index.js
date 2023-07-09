@@ -19,10 +19,10 @@ const buttonWakeup = document.getElementById("button-wakeup");
 const divThisMorningTasks = document.getElementById("div-thisMorningTasks");
 const presentTaskWrapper = document.getElementById("presentTaskWrapper");
 const buttonNextTask = document.getElementById("button-nextTask");
-const divPresentTaskWrapper__timeView__startTime = document.getElementById("div-presentTaskWrapper__timeView--startTime");
-const divPresentTaskWrapper__timeView__delimiter = document.getElementById("div-presentTaskWrapper__timeView--delimiter");
-const divPresentTaskWrapper__timeView__endTime = document.getElementById("div-presentTaskWrapper__timeView--endTime");
-const divPresentTaskWrapper__titleView = document.getElementById("div-presentTaskWrapper__titleView");
+const divPresentTaskWrapper__timeView__startTime = document.getElementById("presentTaskWrapper__timeView--startTime");
+const divPresentTaskWrapper__timeView__delimiter = document.getElementById("presentTaskWrapper__timeView--delimiter");
+const divPresentTaskWrapper__timeView__endTime = document.getElementById("presentTaskWrapper__timeView--endTime");
+const divPresentTaskWrapper__titleView = document.getElementById("presentTaskWrapper__titleView");
 
 const color = {
     text: {
