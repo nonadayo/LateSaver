@@ -17,16 +17,45 @@
 <body>
     <!-- ヘッダー -->
     <header id="header">
-        <h1>Late Saver</h1>
-        <a href="./edit_tasks.html">タスク追加・削除・編集ページ</a>
+        <div id="header-left">
+        
+            <input type="checkbox" id="menu-btn-check">
+            <label for="menu-btn-check" class="menu-btn">
+                <img id="logo" src="..\img\Icons\hamburger-svgrepo-com.svg">
+            </label>    
+            
+            <div class="menu-content">
+                <ul>
+                    <li>
+                        <a href="./edit_tasks.html">タスク追加・削除・編集ページ</a>
+                    </li>
+                    <li>
+                        <a href="#">メニューリンク2</a>
+                    </li>
+                    <li>
+                        <a href="#">メニューリンク3</a>
+                    </li>
+                </ul>
+            </div>
+        
+        </div>
+        <div id="header-mid">
+            <h1>Late Saver</h1>
+        </div>
+
+
     </header>
+
+
+           
+
+    
 
 
 
     <!-- ページの中身 -->
     <div id="pageContentWrapper">
-
-
+        
 
         <div id="centerViewBox">
             <img id="backgroundImage" src="../img/index/bgImage.jpg" alt="">

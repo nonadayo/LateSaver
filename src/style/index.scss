@@ -182,3 +182,107 @@ body {
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+// ヘッダー
+///////////////////////////////////////////////////////////////////////////
+#header {
+    height: 65px;
+    width: 100%;
+    background-color: #D9D9D9;
+    position: fixed;
+    top: 0;
+    z-index: 8;
+    text-align: center;
+}
+
+#logo {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    width: 40px;
+    height: 40px;
+    }
+
+#header-mid {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+// 全力コピペ: https://www.asobou.co.jp/blog/web/css-menu
+
+.menu-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    height: 50px;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.menu-btn:before,
+.menu-btn:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background-color: #ffffff;
+}
+
+#menu-btn-check {
+    display: none;
+}
+
+.menu-content {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 100%;
+    z-index: 9;
+    background-color: #ffffff;
+    transition: all 0.5s;
+}
+
+.menu-content ul {
+    padding: 70px 10px 0;
+}
+
+.menu-content ul li {
+    border-bottom: solid 1px #ffffff;
+    list-style: none;
+}
+
+.menu-content ul li a {
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    box-sizing: border-box;
+    color:black;
+    text-decoration: none;
+    padding: 9px 15px 10px 0;
+    position: relative;
+}
+
+.menu-content ul li a::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-top: solid 2px #000000;
+    border-right: solid 2px #000000;
+    transform: rotate(45deg);
+    position: absolute;
+    right: 11px;
+    top: 16px;
+}
+
+#menu-btn-check:checked ~ .menu-content {
+    right: 0;/*メニューを画面内へ*/
+}
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
