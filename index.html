@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- moduleの読み込み type="module"としないとimportが使えないので注意-->
-    <script type="module" src="../js/class/index.js"></script>
-    <script type="module" src="../js/index.js"></script>
+    <script type="module" src="./src/js/class/index.js"></script>
+    <script type="module" src="./src/js/index.js"></script>
     <!-- cssファイルの読み込み -->
-    <link rel="stylesheet" href="../style/reset.css">
-    <link rel="stylesheet" href="../style/index.css">
+    <link rel="stylesheet" href="./src/style/reset.css">
+    <link rel="stylesheet" href="./src/style/header.css">
+    <link rel="stylesheet" href="./src/style/index.css">
     <title>LateSaver</title>
 </head>
 
@@ -21,13 +22,13 @@
         
             <input type="checkbox" id="menu-btn-check">
             <label for="menu-btn-check" class="menu-btn">
-                <img id="logo" src="..\img\Icons\hamburger-svgrepo-com.svg">
+                <img id="logo" src="./src/img/Icons/hamburger-svgrepo-com.svg">
             </label>    
             
             <div class="menu-content">
                 <ul>
                     <li>
-                        <a href="./edit_tasks.html">タスク追加・削除・編集ページ</a>
+                        <a href="./src/pages/edit_tasks.html">タスク追加・削除・編集ページ</a>
                     </li>
                     <li>
                         <a href="#">メニューリンク2</a>
@@ -58,7 +59,7 @@
         
 
         <div id="centerViewBox">
-            <img id="backgroundImage" src="../img/index/bgImage.jpg" alt="">
+            <img id="backgroundImage" src="./src/img/index/bgImage.jpg" alt="">
             <!-- ユーザー入力欄 -->
             <div id="div-departureTimeInput" class="div-mainBox visible">
                 <p>おはようございます！</p>
