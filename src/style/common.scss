@@ -1,0 +1,8 @@
+@charset "utf-8";
+@use "../style/Variables/Color.scss";
+
+
+
+body {
+    background-color: Color.$base-bg;
+}
