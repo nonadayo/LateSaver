@@ -1,1 +1,55 @@
-/*# sourceMappingURL=edit_tasks.css.map */
+#pageContentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 32px;
+}
+#pageContentWrapper #tasksListBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  gap: 32px;
+  margin-top: 32px;
+}
+#pageContentWrapper #tasksListBox .tasksListBox__task {
+  width: 100%;
+  height: 50px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+}
+#pageContentWrapper #tasksListBox .tasksListBox__task .doubleLineIcon, #pageContentWrapper #tasksListBox .tasksListBox__task .dotIcon {
+  width: 20px;
+  height: 20px;
+}
+#pageContentWrapper #tasksListBox .tasksListBox__task .doubleLineIcon:hover, #pageContentWrapper #tasksListBox .tasksListBox__task .dotIcon:hover {
+  cursor: pointer;
+}
+#pageContentWrapper #taskAddBtnBox {
+  position: fixed;
+  bottom: 32px;
+  width: 40px;
+  height: 40px;
+  background-color: #FFFFFF;
+  border: 2px solid #000000;
+  border-radius: 10px;
+}
+#pageContentWrapper #taskAddBtnBox:hover {
+  cursor: pointer;
+}
+#pageContentWrapper #taskAddBtnBox #taskAddBtn, #pageContentWrapper #taskAddBtnBox #taskAddIcon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+#pageContentWrapper #taskAddBtnBox #taskAddIcon {
+  z-index: 0;
+}
+#pageContentWrapper #taskAddBtnBox #taskAddBtn {
+  z-index: 1;
+  background-color: transparent;
+}/*# sourceMappingURL=edit_tasks.css.map */
