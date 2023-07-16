@@ -34,13 +34,13 @@
     block-size: 100dvb;
     line-height: 1.5;
     letter-spacing: 0.05em;
-    font-family: system-ui, sans-serif;
     -webkit-font-smoothing: antialiased
 }
 
 :where(input, button, textarea, select) {
     font: inherit;
-    color: inherit
+    color: inherit;
+    background-color: white;
 }
 
 :where(textarea) {
@@ -62,6 +62,7 @@
 
 :where(button) {
     border: none;
+    background-color: inherit;
 }
 
 :where(a) {
