@@ -69,7 +69,7 @@
     text-underline-offset: .2ex
 }
 
-:where(ul, ol) {
+:where(ul, ol, li) {
     list-style: none
 }
 

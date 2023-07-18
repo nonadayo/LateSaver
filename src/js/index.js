@@ -16,7 +16,7 @@ let timeLimitViewIntervalFuncID;
 const divDepartureTimeInput = document.getElementById("div-departureTimeInput");
 const inputDepartureTime = document.getElementById("input-departureTime");
 const buttonWakeup = document.getElementById("button-wakeup");
-const divThisMorningTasks = document.getElementById("div-thisMorningTasks");
+const divThisMorningTasks = document.getElementById("thisMorningTasksList");
 const presentTaskWrapper = document.getElementById("presentTaskWrapper");
 const buttonNextTask = document.getElementById("button-nextTask");
 const divPresentTaskWrapper__timeView__startTime = document.getElementById("presentTaskWrapper__timeView--startTime");
@@ -63,12 +63,10 @@ function timeStringToTimeInstance(timeString) {
 // タスクを開始する処理
 function startTasks() {
     // console.log("Wakeup button was clicked.");
-    //いったん「divThisMorningTasks」の中身をすべて削除
-    while (divThisMorningTasks.firstChild) {
-        divThisMorningTasks.removeChild(divThisMorningTasks.firstChild);
-    }
-
-    const tmpTaskOl = document.createElement("ol");
+    // いったん「divThisMorningTasks」の中身をすべて削除
+    // while (divThisMorningTasks.firstChild) {
+    //     divThisMorningTasks.removeChild(divThisMorningTasks.firstChild);
+    // }
 
     const now = new Date();
     const nowTime = new Time(now.getHours(), now.getMinutes());
@@ -89,12 +87,7 @@ function startTasks() {
             divDepartureTimeInput.classList.add("invisible");
             presentTaskWrapper.classList.remove("invisible");
             presentTaskWrapper.classList.add("visible");
-            thisMorningTasksArray.forEach((task) => {
-                const tmpTaskLi = document.createElement("li");
-                tmpTaskLi.textContent = `${task[0].title}（${task[1].getStr()}～${task[2].getStr()}）`;
-                tmpTaskOl.appendChild(tmpTaskLi);
-            });
-            divThisMorningTasks.appendChild(tmpTaskOl);
+            tasksListRender();
             updatePresentTask();
             // 時計描画用のインターバル関数
             timeLimitViewRender();
@@ -113,6 +106,7 @@ function startTasks() {
 function nextTask() {
     thisMorningPresentTaskIndex++;
     updatePresentTask();
+    tasksListRender();
     timeLimitViewRender();
 }
 
@@ -121,8 +115,9 @@ function nextTask() {
 // 出発処理
 function departrue() {
     thisMorningPresentTaskIndex++;
-    buttonNextTask.setAttribute("style", "display: none;");
-    divPresentTaskWrapper__timeView__startTime.textContent = divPresentTaskWrapper__timeView__delimiter.textContent = divPresentTaskWrapper__timeView__endTime.textContent = "";
+    document.querySelector("#presentTaskWrapper__timeLimitAndNextBtn").setAttribute("style", "display: none;");
+    document.querySelector("#presentTaskWrapper__timeView").setAttribute("style", "display: none");
+    // divPresentTaskWrapper__timeView__startTime.textContent = divPresentTaskWrapper__timeView__delimiter.textContent = divPresentTaskWrapper__timeView__endTime.textContent = "";
     divPresentTaskWrapper__titleView.textContent = "行ってらっしゃい！";
     // 値の初期化処理
     clearInterval(timeLimitViewIntervalFuncID);
@@ -172,6 +167,77 @@ function updatePresentTask() {
             buttonNextTask.textContent = "Let's Go!";
         }
     }
+}
+
+
+
+// タスク一覧を表示する関数
+function tasksListRender() {
+    // レンダリング対象の配列を作成
+    const renderTargetArr = []
+    for (let i=thisMorningPresentTaskIndex+1; i<thisMorningTasksArray.length; i++) {
+        renderTargetArr.push(thisMorningTasksArray[i]);
+    }
+    // 一度削除する
+    while (divThisMorningTasks.firstChild) {
+        divThisMorningTasks.removeChild(divThisMorningTasks.firstChild);
+    }
+    // レンダリング開始
+    renderTargetArr.forEach((task, index) => {
+        const tmpTaskLi = createTaskDOM(task[0].title, task[1].getStr(), task[2].getStr());
+        // 始めの1つにはnextのアイコンをつける
+        if (index === 0) {
+            const nextIconBoxDOM = document.createElement("div");
+            nextIconBoxDOM.setAttribute("class", "nextIconBox");
+            const nextTextDOM = document.createElement("p");
+            nextTextDOM.innerText = "Next";
+            const nextIconDOM = document.createElement("img");
+            nextIconDOM.setAttribute("src", "./src/img/Icons/doubleRightArrow.svg");
+            nextIconBoxDOM.appendChild(nextTextDOM);
+            nextIconBoxDOM.appendChild(nextIconDOM);
+            divThisMorningTasks.appendChild(nextIconBoxDOM);
+        }
+        divThisMorningTasks.appendChild(tmpTaskLi);
+    });
+}
+
+
+
+// タスク一覧表示のリスト1要素を作成する関数
+function createTaskDOM(title, startTime, endTime) {
+    // 時間の表示
+    const timeDOM      = document.createElement("div");
+    timeDOM.setAttribute("class", "thisMorningTasksList__task--timeBox");
+    const startTimeDOM = document.createElement("span");
+    const timeMidDOM   = document.createElement("span");
+    const endTimeDOM   = document.createElement("span");
+    startTimeDOM.innerText = startTime;
+    timeMidDOM.innerText   = "～";
+    endTimeDOM.innerText   = endTime;
+    timeDOM.appendChild(startTimeDOM);
+    timeDOM.appendChild(timeMidDOM);
+    timeDOM.appendChild(endTimeDOM);
+    // アイコンの表示
+    const iconDOM = document.createElement("img");
+    iconDOM.setAttribute("class", "thisMorningTasksList__task--icon");
+    iconDOM.setAttribute("src", "./src/img/Icons/checkCircle.svg");
+    // タイトルの表示
+    const titleDOM = document.createElement("p");
+    titleDOM.setAttribute("class", "thisMorningTasksList__task--title");
+    titleDOM.innerText = title;
+    // 全体の統合
+    const liDOM = document.createElement("li");
+    liDOM.setAttribute("class", "thisMorningTasksList__task");
+    const liLeftSideDOM  = document.createElement("div");
+    const liRightSideDOM = document.createElement("div");
+    liLeftSideDOM.setAttribute("class", "taskElemLeftSide");
+    liRightSideDOM.setAttribute("class", "taskElemRightSide");
+    liLeftSideDOM.appendChild(iconDOM);
+    liRightSideDOM.appendChild(timeDOM);
+    liRightSideDOM.appendChild(titleDOM);
+    liDOM.appendChild(liLeftSideDOM);
+    liDOM.appendChild(liRightSideDOM);
+    return liDOM;
 }
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -254,7 +320,7 @@ function timeLimitViewRender() {
         newStyle = `conic-gradient(${color.background.deepGreen} ${degreeRange[0]}deg ${degreeRange[1]}deg)`;
     // 現在時刻がタスク終了予定の時刻よりも前の場合
     } else {
-        newStyle = `conic-gradient(${color.background.deepGreen} 0deg ${degreeRange[0]}deg, ${color.background.lightGreen} ${degreeRange[0]}deg ${degreeRange[1]}deg, ${color.background.general} ${degreeRange[1]}deg 360deg)`;
+        newStyle = `conic-gradient(${color.background.deepGreen} 0deg ${degreeRange[0]}deg, ${color.background.lightGreen} ${degreeRange[0]}deg ${degreeRange[1]}deg, rgba(0, 0, 0, 0.5) ${degreeRange[1]}deg 360deg)`;
     }
     const timeLimitViewDOM = document.querySelector("#presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox");
     timeLimitViewDOM.style.background = newStyle;

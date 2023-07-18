@@ -29,13 +29,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  top: 50vh;
+  transform: translateY(-50%);
+  width: 100%;
 }
 
 #centerViewBox {
   position: relative;
-  top: 50vh;
-  transform: translateY(-50%);
-  width: 100%;
 }
 #centerViewBox #backgroundImage {
   z-index: 0;
@@ -90,6 +90,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   font-weight: bold;
 }
 #presentTaskWrapper__timeLimitAndNextBtn {
@@ -113,7 +114,7 @@
 }
 @media screen and (max-width: 480px) {
   #presentTaskWrapper__timeLimitAndNextBtn .button-main {
-    width: 70px;
+    width: 80px;
     height: 30px;
   }
 }
@@ -124,4 +125,50 @@
   #presentTaskWrapper__timeView {
     margin-top: 8px;
   }
+}
+#div-thisMorningTasks {
+  margin-top: 32px;
+  position: relative;
+  color: #3A4909;
+}
+#div-thisMorningTasks #thisMorningTasksList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+#div-thisMorningTasks #thisMorningTasksList .nextIconBox {
+  position: absolute;
+  left: -70px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+}
+#div-thisMorningTasks #thisMorningTasksList .nextIconBox img {
+  width: 25px;
+  height: 25px;
+}
+#div-thisMorningTasks #thisMorningTasksList .thisMorningTasksList__task {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+#div-thisMorningTasks #thisMorningTasksList .thisMorningTasksList__task .taskElemLeftSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#div-thisMorningTasks #thisMorningTasksList .thisMorningTasksList__task .taskElemRightSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+#div-thisMorningTasks #thisMorningTasksList .thisMorningTasksList__task--icon {
+  width: 20px;
+  height: 20px;
+}
+#div-thisMorningTasks #thisMorningTasksList .thisMorningTasksList__task--timeBox {
+  display: flex;
 }/*# sourceMappingURL=index.css.map */
