@@ -1,4 +1,5 @@
 @use "./Variables/Color.scss";
+@use "./Variables/Responsive.scss";
 
 
 
@@ -79,6 +80,9 @@
         height: 60%;
         min-width: 200px;
         min-height: 130px;
+        @include Responsive.mobile() {
+            padding: 16px 24px;
+        }
         &.visible {
             display: flex;
         }
@@ -144,16 +148,23 @@
             border: 1px solid Color.$white;
             border-radius: 50%;
             transition: all 1s ease-in-out;
+            @include Responsive.mobile() {
+                width: 70px;
+                height: 70px;
+            }
+        }
+        .button-main {
+            @include Responsive.mobile() {
+                width: 70px;
+                height: 30px;
+            }
         }
     }
     &__timeView {
         margin-top: 24px;
-    }
-
-
-
-    &__timeView {
-
+        @include Responsive.mobile() {
+            margin-top: 8px;
+        }
     }
 
 

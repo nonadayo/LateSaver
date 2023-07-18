@@ -56,6 +56,11 @@
   min-width: 200px;
   min-height: 130px;
 }
+@media screen and (max-width: 480px) {
+  #centerViewBox #div-departureTimeInput, #centerViewBox #presentTaskWrapper {
+    padding: 16px 24px;
+  }
+}
 #centerViewBox #div-departureTimeInput.visible, #centerViewBox #presentTaskWrapper.visible {
   display: flex;
 }
@@ -100,6 +105,23 @@
   border-radius: 50%;
   transition: all 1s ease-in-out;
 }
+@media screen and (max-width: 480px) {
+  #presentTaskWrapper__timeLimitAndNextBtn--timeLimitViewBox {
+    width: 70px;
+    height: 70px;
+  }
+}
+@media screen and (max-width: 480px) {
+  #presentTaskWrapper__timeLimitAndNextBtn .button-main {
+    width: 70px;
+    height: 30px;
+  }
+}
 #presentTaskWrapper__timeView {
   margin-top: 24px;
+}
+@media screen and (max-width: 480px) {
+  #presentTaskWrapper__timeView {
+    margin-top: 8px;
+  }
 }/*# sourceMappingURL=index.css.map */
