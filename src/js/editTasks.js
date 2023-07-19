@@ -171,9 +171,9 @@ function updateTaskTableFromTasksList() {
 function tasksListRender() {
     tasksList.data.forEach((task) => {
         // アイコンの作成
-        const doubleLineIconElement = document.createElement("img");
-        doubleLineIconElement.setAttribute("src", "../img/Icons/doubleLineIcon.svg");
-        doubleLineIconElement.setAttribute("class", "doubleLineIcon");
+        const upDownIconElement = document.createElement("img");
+        upDownIconElement.setAttribute("src", "../img/Icons/upDownIcon.svg");
+        upDownIconElement.setAttribute("class", "upDownIcon");
         const dotIconElement = document.createElement("img");
         dotIconElement.setAttribute("src", "../img/Icons/dotIcon.svg");
         dotIconElement.setAttribute("class", "dotIcon");
@@ -183,10 +183,15 @@ function tasksListRender() {
         taskTitle.setAttribute("class", "tasksListBox__task--title");
         taskTitle.innerText = task.title;
 
+        // ボタンを作成
+        // const taskAddBtn = document.createElement("button");
+        // taskTitle.setAttribute("class", "tasksListBox__task--btn");
+
         // liを作成
         const taskElement = document.createElement("li");
         taskElement.setAttribute("class", `tasksListBox__task`);
-        taskElement.appendChild(doubleLineIconElement);
+        // taskElement.appendChild(taskAddBtn);
+        taskElement.appendChild(upDownIconElement);
         taskElement.appendChild(taskTitle);
         taskElement.appendChild(dotIconElement);
 

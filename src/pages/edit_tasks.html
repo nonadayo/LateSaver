@@ -8,6 +8,7 @@
     <!-- moduleの読み込み type="module"としないとimportが使えないので注意-->
     <script type="module" src="../js/class/index.js"></script>
     <script type="module" src="../js/editTasks.js"></script>
+    <script type="module" src="../js/popUp.js"></script>
     <!-- cssファイルの読み込み -->
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/header.css">
@@ -51,7 +52,9 @@
 
     <div id="pageContentWrapper">
         <h3>タスク一覧</h3>
-        <ul id="tasksListBox"></ul>
+        <ul id="tasksListBox">
+            <button id="taskEditBtn"></button>
+        </ul>
         <!-- <form action="" id="taskAddForm">
             <div id="taskAddBtnBox">
                 <button id="taskAddBtn"></button>
@@ -60,8 +63,10 @@
             <input type="text" id="taskTitleInput">
         </form> -->
         <div id="taskAddBtnBox">
+        <!-- <div id="show-btn"> -->
             <button id="taskAddBtn"></button>
             <img src="../img/Icons/addBtnIcon.svg" id="taskAddBtnIcon">
+            <div id="taskAddMessage">新規登録</div>
         </div>
         <div id="div-taskTable"></div>
         <fieldset>
@@ -75,7 +80,28 @@
             <button id="button-newTask">追加</button>
         </fieldset>
         <hr>
+
+        <div id="popup" class="popup">
+            <div class="popup-inner">
+                <div id="close-btn" class="close-btn">✖</div>
+                <fieldset>
+                    <legend>タスクを追加</legend>
+                    <label for="input-newTaskTitle">タイトル：</label>
+                    <input type="text" id="input-newTaskTitle">
+                    <label for="input-newTaskMin">所要時間（最短）：</label>
+                    <input type="number" id="input-newTaskMin">
+                    <label for="input-newTaskMax">所要時間（最長）：</label>
+                    <input type="number" id="input-newTaskMax">
+                    <button id="button-newTask">追加</button>
+                </fieldset>
+            </div><!-- .popup-inner -->
+            <div id="bg-black" class="bg-black"></div>
+        </div><!-- #popup -->
+        
+        
+
     </div>
+    
 </body>
 
 </html>
