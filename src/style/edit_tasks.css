@@ -51,6 +51,70 @@
 #pageContentWrapper #tasksListBox .tasksListBox__task .trashIcon:hover {
   cursor: pointer;
 }
+#pageContentWrapper #addNewTaskForm {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#pageContentWrapper #addNewTaskForm .addNewTaskForm__title {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+#pageContentWrapper #addNewTaskForm .addNewTaskForm__addBtnBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#pageContentWrapper #addNewTaskForm .addNewTaskForm__addBtnBox #button-newTask {
+  width: 150px;
+  height: 40px;
+  background-color: #FDFAE9;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+#pageContentWrapper #addNewTaskForm .addNewTaskForm__addBtnBox #button-newTask:hover {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+#pageContentWrapper #taskAddForm {
+  position: fixed;
+  bottom: 24px;
+  width: 480px;
+  display: flex;
+  background-color: #FFFFFF;
+}
+#pageContentWrapper #taskAddForm #taskAddBtnBox {
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+#pageContentWrapper #taskAddForm #taskAddBtnBox #taskAddBtn {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+#pageContentWrapper #taskAddForm #taskAddBtnBox #taskAddBtn:hover {
+  cursor: pointer;
+}
+#pageContentWrapper #taskAddForm #taskAddBtnBox #taskAddBtnIcon {
+  z-index: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+#pageContentWrapper #taskAddForm #taskTitleInput {
+  width: 100%;
+  border: none;
+}
+#pageContentWrapper #taskAddForm #taskTitleInput:focus {
+  border: none;
+}
 #pageContentWrapper #taskAddBtnBox {
   position: fixed;
   bottom: 32px;

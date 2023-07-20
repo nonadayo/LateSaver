@@ -66,16 +66,24 @@
         <div id="popup" class="popup">
             <div class="popup-inner">
                 <div id="close-btn" class="close-btn">✖</div>
-                <fieldset>
-                    <legend>タスクを追加</legend>
-                    <label for="input-newTaskTitle">タイトル：</label>
-                    <input type="text" id="input-newTaskTitle">
-                    <label for="input-newTaskMin">所要時間（最短）：</label>
-                    <input type="number" id="input-newTaskMin">
-                    <label for="input-newTaskMax">所要時間（最長）：</label>
-                    <input type="number" id="input-newTaskMax">
-                    <button id="button-newTask">追加</button>
-                </fieldset>
+                <form id="addNewTaskForm">
+                    <p class="addNewTaskForm__title">タスクを追加</p>
+                    <div class="addNewTaskForm__inputTitleBox">
+                        <label for="input-newTaskTitle">タイトル:</label>
+                        <input type="text" id="input-newTaskTitle">
+                    </div>
+                    <div class="addNewTaskForm__inputMinBox">
+                        <label for="input-newTaskMin">所要時間(最短):</label>
+                        <input type="number" id="input-newTaskMin">
+                    </div>
+                    <div class="addNewTaskForm__inputMaxBox">
+                        <label for="input-newTaskMax">所要時間(最長):</label>
+                        <input type="number" id="input-newTaskMax">
+                    </div>
+                    <div class="addNewTaskForm__addBtnBox">
+                        <button id="button-newTask">追加</button>
+                    </div>
+                </form>
             </div><!-- .popup-inner -->
             <div id="bg-black" class="bg-black"></div>
         </div><!-- #popup -->

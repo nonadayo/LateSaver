@@ -74,41 +74,81 @@
 ///////////////////////////////////////////////////////////
 // 新規追加フォーム
 ///////////////////////////////////////////////////////////
-    // #taskAddForm {
-    //     position: fixed;
-    //     bottom: 24px;
-    //     width: calc(Size.$pageContent-maxWidth * 0.8);
-    //     display: flex;
-    //     background-color: Color.$white;
-    //     #taskAddBtnBox {
-    //         position: relative;
-    //         width: 30px;
-    //         height: 30px;
-    //         #taskAddBtn {
-    //             position: absolute;
-    //             z-index: 1;
-    //             width: 100%;
-    //             height: 100%;
-    //             &:hover {
-    //                 cursor: pointer;
-    //             }
-    //         }
-    //         #taskAddBtnIcon {
-    //             z-index: 0;
-    //             position: absolute;
-    //             width: 100%;
-    //             height: 100%;
-    //         }
-    //     }
+    #addNewTaskForm {
+        display: flex;
+        gap: 8px;
+        flex-direction: column;
+        align-items: flex-start;
+        .addNewTaskForm__title {
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+        .addNewTaskForm__inputTitleBox {
+            
+        }
+        .addNewTaskForm__inputMinBox {
 
-    //     #taskTitleInput {
-    //         width: 100%;
-    //         border: none;
-    //         &:focus {
-    //             border: none;
-    //         }
-    //     }
-    // }
+        }
+        .addNewTaskForm__inputMaxBox {
+
+        }
+        .addNewTaskForm__addBtnBox {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            #button-newTask {
+                width: 150px;
+                height: 40px;
+                background-color: Color.$base-bg;
+                border: 1px solid Color.$black;
+                border-radius: 5px;
+                font-size: .8rem;
+                font-weight: bold;
+                &:hover {
+                    background-color: Color.$black;
+                    color: Color.$white;
+                }
+            }
+        }
+    }
+    #taskAddForm {
+        position: fixed;
+        bottom: 24px;
+        width: calc(Size.$pageContent-maxWidth * 0.8);
+        display: flex;
+        background-color: Color.$white;
+        #taskAddBtnBox {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            #taskAddBtn {
+                position: absolute;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            #taskAddBtnIcon {
+                z-index: 0;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        #taskTitleInput {
+            width: 100%;
+            border: none;
+            &:focus {
+                border: none;
+            }
+        }
+    }
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
