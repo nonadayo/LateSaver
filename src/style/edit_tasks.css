@@ -29,11 +29,18 @@
   justify-content: space-between;
   background-color: #FFFFFF;
 }
-#pageContentWrapper #tasksListBox .tasksListBox__task .upDownIcon {
+#pageContentWrapper #tasksListBox .tasksListBox__task .upIcon {
   width: 20px;
   height: 20px;
 }
-#pageContentWrapper #tasksListBox .tasksListBox__task .upDownIcon:hover {
+#pageContentWrapper #tasksListBox .tasksListBox__task .upIcon:hover {
+  cursor: pointer;
+}
+#pageContentWrapper #tasksListBox .tasksListBox__task .downIcon {
+  width: 20px;
+  height: 20px;
+}
+#pageContentWrapper #tasksListBox .tasksListBox__task .downIcon:hover {
   cursor: pointer;
 }
 #pageContentWrapper #tasksListBox .tasksListBox__task .dotIcon {

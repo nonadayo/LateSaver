@@ -35,7 +35,14 @@
             align-items: center;
             justify-content: space-between;
             background-color: Color.$white;
-            .upDownIcon {
+            .upIcon {
+                width: 20px;
+                height: 20px;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            .downIcon {
                 width: 20px;
                 height: 20px;
                 &:hover {
