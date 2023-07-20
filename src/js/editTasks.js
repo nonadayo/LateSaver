@@ -184,7 +184,7 @@ function tasksListRender() {
         taskTitle.innerText = task.title;
 
         // ボタンを作成
-        // const taskAddBtn = document.createElement("button");
+        const taskAddBtn = document.createElement("button");
         // taskTitle.setAttribute("class", "tasksListBox__task--btn");
 
         // liを作成
