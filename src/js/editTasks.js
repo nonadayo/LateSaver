@@ -174,9 +174,11 @@ function tasksListRender() {
         const upIconElement = document.createElement("img");
         upIconElement.setAttribute("src", "../img/Icons/upIcon.svg");
         upIconElement.setAttribute("class", "upIcon");
+        upIconElement.addEventListener("click", () => upOrder(index));
         const downIconElement = document.createElement("img");
         downIconElement.setAttribute("src", "../img/Icons/downIcon.svg");
         downIconElement.setAttribute("class", "downIcon");
+        downIconElement.addEventListener("click", () => downOrder(index));
         const dotIconElement = document.createElement("img");
         dotIconElement.setAttribute("src", "../img/Icons/dotIcon.svg");
         dotIconElement.setAttribute("class", "dotIcon");
@@ -253,19 +255,23 @@ buttonNewTask.addEventListener("click", () => {
 // 優先順位の変更
 function upOrder(taskIndex) {
     const targetIndex = taskIndex - 1;
-    const targetElem  = tasksList[targetIndex];
-    tasksList[targetIndex] = tasksList[taskIndex];
-    tasksList[taskIndex]   = targetElem;
-    updateLocalStorageFromTasksList();
-    updateTaskTableFromTasksList();
+    const targetElem  = tasksList.data[targetIndex];
+    if (targetIndex >= 0) {
+        tasksList.data[targetIndex] = tasksList.data[taskIndex];
+        tasksList.data[taskIndex]   = targetElem;
+        updateLocalStorageFromTasksList();
+        updateTaskTableFromTasksList();
+    }
 }
 function downOrder(taskIndex) {
     const targetIndex = taskIndex + 1;
-    const targetElem  = tasksList[targetIndex];
-    tasksList[targetIndex] = tasksList[taskIndex];
-    tasksList[taskIndex]   = targetElem;
-    updateLocalStorageFromTasksList();
-    updateTaskTableFromTasksList();
+    const targetElem  = tasksList.data[targetIndex];
+    if (targetIndex < tasksList.data.length) {
+        tasksList.data[targetIndex] = tasksList.data[taskIndex];
+        tasksList.data[taskIndex]   = targetElem;
+        updateLocalStorageFromTasksList();
+        updateTaskTableFromTasksList();
+    }
 }
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
