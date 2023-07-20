@@ -242,6 +242,26 @@ buttonNewTask.addEventListener("click", () => {
         // console.log(tasksList.data);
     }
 });
+
+
+
+// 優先順位の変更
+function upOrder(taskIndex) {
+    const targetIndex = taskIndex - 1;
+    const targetElem  = tasksList[targetIndex];
+    tasksList[targetIndex] = tasksList[taskIndex];
+    tasksList[taskIndex]   = targetElem;
+    updateLocalStorageFromTasksList();
+    updateTaskTableFromTasksList();
+}
+function downOrder(taskIndex) {
+    const targetIndex = taskIndex + 1;
+    const targetElem  = tasksList[targetIndex];
+    tasksList[targetIndex] = tasksList[taskIndex];
+    tasksList[taskIndex]   = targetElem;
+    updateLocalStorageFromTasksList();
+    updateTaskTableFromTasksList();
+}
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
