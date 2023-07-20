@@ -178,9 +178,11 @@ function tasksListRender() {
         const downIconElement = document.createElement("img");
         downIconElement.setAttribute("src", "../img/Icons/downIcon.svg");
         downIconElement.setAttribute("class", "downIcon");
-        const dotIconElement = document.createElement("img");
-        dotIconElement.setAttribute("src", "../img/Icons/dotIcon.svg");
-        dotIconElement.setAttribute("class", "dotIcon");
+        downIconElement.addEventListener("click", () => downOrder(index));
+        const trashIconElement = document.createElement("img");
+        trashIconElement.setAttribute("src", "../img/Icons/trashIcon.svg");
+        trashIconElement.setAttribute("class", "trashIcon");
+        trashIconElement.addEventListener("click", () => deleteTask(index));
 
         // タスクのタイトルを作成
         const taskTitle = document.createElement("p");
@@ -271,6 +273,15 @@ function downOrder(taskIndex) {
         updateLocalStorageFromTasksList();
         updateTaskTableFromTasksList();
     }
+}
+
+
+
+// タスクの削除
+function deleteTask(taskIndex) {
+    tasksList.data.splice(taskIndex, 1);
+    updateLocalStorageFromTasksList();
+    updateTaskTableFromTasksList();
 }
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
