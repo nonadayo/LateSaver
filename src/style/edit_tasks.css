@@ -43,11 +43,12 @@
 #pageContentWrapper #tasksListBox .tasksListBox__task .downIcon:hover {
   cursor: pointer;
 }
-#pageContentWrapper #tasksListBox .tasksListBox__task .dotIcon {
-  width: 20px;
-  height: 20px;
+#pageContentWrapper #tasksListBox .tasksListBox__task .trashIcon {
+  width: 40px;
+  height: 40px;
+  padding: 10px 10px;
 }
-#pageContentWrapper #tasksListBox .tasksListBox__task .dotIcon:hover {
+#pageContentWrapper #tasksListBox .tasksListBox__task .trashIcon:hover {
   cursor: pointer;
 }
 #pageContentWrapper #taskAddBtnBox {

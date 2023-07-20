@@ -178,7 +178,6 @@ function tasksListRender() {
         const downIconElement = document.createElement("img");
         downIconElement.setAttribute("src", "../img/Icons/downIcon.svg");
         downIconElement.setAttribute("class", "downIcon");
-        downIconElement.addEventListener("click", () => downOrder(index));
         const dotIconElement = document.createElement("img");
         dotIconElement.setAttribute("src", "../img/Icons/dotIcon.svg");
         dotIconElement.setAttribute("class", "dotIcon");
@@ -200,7 +199,7 @@ function tasksListRender() {
         taskElement.appendChild(upIconElement);
         taskElement.appendChild(downIconElement);
         taskElement.appendChild(taskTitle);
-        taskElement.appendChild(dotIconElement);
+        taskElement.appendChild(trashIconElement);
 
         document.querySelector("#tasksListBox").appendChild(taskElement);
     })
