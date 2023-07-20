@@ -169,11 +169,14 @@ function updateTaskTableFromTasksList() {
 
 // tasksListからDOMを作成し挿入する関数
 function tasksListRender() {
-    tasksList.data.forEach((task) => {
+    tasksList.data.forEach((task, index) => {
         // アイコンの作成
-        const upDownIconElement = document.createElement("img");
-        upDownIconElement.setAttribute("src", "../img/Icons/upDownIcon.svg");
-        upDownIconElement.setAttribute("class", "upDownIcon");
+        const upIconElement = document.createElement("img");
+        upIconElement.setAttribute("src", "../img/Icons/upIcon.svg");
+        upIconElement.setAttribute("class", "upIcon");
+        const downIconElement = document.createElement("img");
+        downIconElement.setAttribute("src", "../img/Icons/downIcon.svg");
+        downIconElement.setAttribute("class", "downIcon");
         const dotIconElement = document.createElement("img");
         dotIconElement.setAttribute("src", "../img/Icons/dotIcon.svg");
         dotIconElement.setAttribute("class", "dotIcon");
@@ -184,14 +187,16 @@ function tasksListRender() {
         taskTitle.innerText = task.title;
 
         // ボタンを作成
-        const taskAddBtn = document.createElement("button");
+        // const taskAddBtn = document.createElement("button");
         // taskTitle.setAttribute("class", "tasksListBox__task--btn");
 
         // liを作成
         const taskElement = document.createElement("li");
         taskElement.setAttribute("class", `tasksListBox__task`);
+        taskElement.classList.add(`taskIndex${index}`);
         // taskElement.appendChild(taskAddBtn);
-        taskElement.appendChild(upDownIconElement);
+        taskElement.appendChild(upIconElement);
+        taskElement.appendChild(downIconElement);
         taskElement.appendChild(taskTitle);
         taskElement.appendChild(dotIconElement);
 
